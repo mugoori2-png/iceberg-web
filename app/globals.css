@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-navy text-ink font-sans antialiased;
+  word-break: keep-all;
+}
+
+::selection {
+  background: rgba(76, 141, 255, 0.35);
+}
