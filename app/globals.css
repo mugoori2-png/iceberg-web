@@ -14,3 +14,43 @@ body {
 ::selection {
   background: rgba(76, 141, 255, 0.35);
 }
+
+/* ── 고급감 디테일 ─────────────────────────── */
+
+/* 스크롤 리빌 — .reveal 붙은 요소가 뷰포트에 들어오면 떠오른다 */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 히어로 빙산 — 천천히 떠다니는 부유감 */
+@keyframes floatSlow {
+  0%, 100% { transform: translate(-50%, 0) rotate(-1deg); }
+  50% { transform: translate(-50%, -16px) rotate(1deg); }
+}
+.hero-iceberg {
+  animation: floatSlow 9s ease-in-out infinite;
+}
+
+/* 미세 도트 그리드 — 히어로 배경 깊이감 */
+.bg-dots {
+  background-image: radial-gradient(rgba(148, 178, 255, 0.10) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 30%, transparent 75%);
+}
+
+/* 카드 호버 글로우 */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(76, 141, 255, 0.45);
+  box-shadow: 0 14px 44px rgba(76, 141, 255, 0.13);
+}

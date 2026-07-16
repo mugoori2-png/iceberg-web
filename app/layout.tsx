@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "홈페이지 수정 클리닉 — 필요한 곳만 고쳐드립니다",
+  title: "ICEBERG — 보이는 서비스는 빙산의 일각입니다",
   description:
-    "홈페이지, 새로 만들지 마세요. 텍스트 수정, 이미지 교체, 버튼 링크 변경, 모바일 깨짐까지 빠르게 정리해드립니다. 화면 캡처 한 장이면 상담을 시작할 수 있습니다.",
+    "Idea · Code · Execute. 문제은행 12,000+, AI 튜터, 자동 채점, 출결 — 매일 실제로 돌아가는 시스템을 직접 만들어 운영합니다. 홈페이지 수정부터 업무 자동화, AI 챗봇 구축까지.",
 };
 
 export default function RootLayout({
