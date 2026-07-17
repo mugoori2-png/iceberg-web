@@ -63,6 +63,40 @@ function useDiveProgress(ref: React.RefObject<HTMLElement>) {
   }, [ref]);
 }
 
+/** 페이지 수심 게이지 — 문서 전체 스크롤 진행(0→1)을 --sp 로 노출, 맨 아래가 DEEP */
+function PageDepthGauge() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      el.style.setProperty("--sp", total > 0 ? Math.min(window.scrollY / total, 1).toFixed(4) : "0");
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+  return (
+    <div ref={ref} className="page-depth pointer-events-none hidden xl:block" aria-hidden="true">
+      <span className="dive-depth-top">SEA&nbsp;LV</span>
+      <span className="page-depth-marker" />
+      <span className="dive-depth-bottom">DEEP</span>
+    </div>
+  );
+}
+
 /** 숫자 카운트업 — "12,000+" 같은 문자열에서 숫자만 뽑아 올라가게 */
 function CountUp({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -158,6 +192,8 @@ export default function HubPage() {
 
   return (
     <main className="min-h-screen bg-navy text-ink">
+      {/* 페이지 전체 수심 게이지 — 맨 아래까지 스크롤하면 DEEP 도달 */}
+      <PageDepthGauge />
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-line bg-navy/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5 md:px-10">
@@ -230,13 +266,6 @@ export default function HubPage() {
           {/* 상단 글로우 */}
           <div className="dive-glow pointer-events-none absolute left-1/2 top-[-12%] h-[520px] w-[860px]" />
 
-          {/* 수심 게이지 — 잠수 진행 계기 (데스크톱) */}
-          <div className="dive-depth pointer-events-none hidden md:block">
-            <span className="dive-depth-top">SEA&nbsp;LV</span>
-            <span className="dive-depth-marker" />
-            <span className="dive-depth-bottom">DEEP</span>
-          </div>
-
           {/* 헤드라인 가독 스크림 + 필름 그레인 */}
           <div className="dive-scrim pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
           <div className="grain pointer-events-none absolute inset-0" />
@@ -283,19 +312,19 @@ export default function HubPage() {
               </div>
             </div>
 
-            {/* 잠수 후 — 수면 아래 실제 시스템들 */}
-            <div className="dive-deep">
-              <p className="eyebrow mb-4 text-[12px] font-bold text-cyan">BELOW THE SURFACE</p>
-              <h2 className="mx-auto mb-4 max-w-[720px] text-[30px] font-extrabold leading-[1.16] tracking-tight md:text-[46px] [text-shadow:0_2px_28px_rgba(3,8,20,0.65)]">
+            {/* 잠수 후 — 수면 아래 실제 시스템들 (인트로와 같은 왼쪽 라인) */}
+            <div className="dive-deep text-center md:text-left">
+              <p className="eyebrow mb-4 text-[12px] font-bold text-cyan md:justify-start">BELOW THE SURFACE</p>
+              <h2 className="mx-auto mb-4 max-w-[720px] text-[30px] font-extrabold leading-[1.16] tracking-tight md:mx-0 md:text-[52px] [text-shadow:0_2px_28px_rgba(3,8,20,0.65)]">
                 수면 아래엔, 매일 실제로
                 <br className="hidden sm:block" /> 돌아가는 <span className="text-ice">시스템들</span>이 있습니다.
               </h2>
-              <p className="mx-auto mb-9 max-w-[560px] text-[15px] leading-relaxed text-muted md:text-lg">
+              <p className="mx-auto mb-9 max-w-[560px] text-[15px] leading-relaxed text-muted md:mx-0 md:text-lg">
                 문제은행 12,000+ · AI 튜터 · 자동 채점 · 출결.
                 <br className="hidden md:block" />
                 전부 지금 실제 운영 중 — 아래 작업사례에서 직접 확인하실 수 있습니다.
               </p>
-              <div className="dive-deep-body mx-auto grid max-w-[720px] grid-cols-2 gap-3 md:grid-cols-4">
+              <div className="dive-deep-body mx-auto grid max-w-[720px] grid-cols-2 gap-3 md:mx-0 md:grid-cols-4">
                 {STATS.map((s) => (
                   <div key={s.label} className="lux-card rounded-2xl px-4 py-5">
                     <p className="text-[24px] font-extrabold tracking-tight text-accent md:text-[28px]">
@@ -305,7 +334,7 @@ export default function HubPage() {
                   </div>
                 ))}
               </div>
-              <div className="dive-deep-body mt-8 flex flex-col justify-center gap-3.5 sm:flex-row">
+              <div className="dive-deep-body mt-8 flex flex-col justify-center gap-3.5 sm:flex-row md:justify-start">
                 <a
                   href="#works"
                   className="btn-primary rounded-xl px-8 py-4 text-[17px] font-extrabold text-navy"

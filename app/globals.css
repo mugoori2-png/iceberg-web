@@ -95,7 +95,7 @@ body {
   opacity: clamp(0, calc(1 - var(--p) * 3.2), 1);
   transform: translateY(calc(var(--p) * -44px));
 }
-/* 수면 아래 카피 — 어느 정도 내려오면 떠오른다 */
+/* 수면 아래 카피 — 어느 정도 내려오면 떠오른다 (인트로와 같은 좌측 라인) */
 .dive-deep {
   position: absolute;
   left: 0;
@@ -104,6 +104,11 @@ body {
   padding: 0 24px;
   transform: translateY(calc(-50% + (1 - var(--p)) * 40px));
   opacity: clamp(0, calc((var(--p) - 0.52) * 3), 1);
+}
+@media (min-width: 768px) {
+  .dive-deep {
+    padding: 0 40px; /* 래퍼 md:px-10과 동일 — 인트로 텍스트와 같은 x축 시작점 */
+  }
 }
 /* 완전히 떠오르기 전엔 카드/버튼 클릭 막기 (겹침 방지) */
 .dive-deep-body {
@@ -161,7 +166,7 @@ body {
   .dive-intro, .dive-deep { opacity: 1; transform: none; }
   .dive-deep { position: static; margin-top: 56px; padding: 0 24px; }
   .dive-deep-body { pointer-events: auto; }
-  .dive-bubbles, .dive-cue, .dive-glow, .dive-rays, .dive-depth, .dive-scrim, .dive-dim { display: none; }
+  .dive-bubbles, .dive-cue, .dive-glow, .dive-rays, .page-depth, .dive-scrim, .dive-dim { display: none; }
   .dive-scene { position: absolute; inset: 0; height: 100%; transform: none; opacity: 0.5; }
   .dive-scene img { animation: none; }
 }
@@ -212,9 +217,9 @@ body {
   }
 }
 
-/* 수심 게이지 — 좌측에서 잠수 진행을 보여주는 계기 */
-.dive-depth {
-  position: absolute;
+/* 수심 게이지 — 페이지 전체 스크롤을 따라가는 고정 계기 (맨 아래 = DEEP) */
+.page-depth {
+  position: fixed;
   left: clamp(20px, 4vw, 56px);
   top: 50%;
   transform: translateY(-50%);
@@ -225,18 +230,19 @@ body {
     rgba(150, 200, 255, 0.35) 0 1px,
     transparent 1px calc(44vh / 10)
   ), linear-gradient(180deg, rgba(150, 200, 255, 0.22), rgba(150, 200, 255, 0.08));
-  z-index: 4;
+  z-index: 40;
 }
-.dive-depth-marker {
+.page-depth-marker {
   position: absolute;
   left: 50%;
-  top: calc(var(--p) * 100%);
+  top: calc(var(--sp, 0) * 100%);
   width: 9px;
   height: 9px;
   border-radius: 999px;
   transform: translate(-50%, -50%);
   background: #7fd4ff;
   box-shadow: 0 0 12px rgba(127, 212, 255, 0.9), 0 0 34px rgba(76, 141, 255, 0.5);
+  transition: top 0.15s linear;
 }
 .dive-depth-top,
 .dive-depth-bottom {
