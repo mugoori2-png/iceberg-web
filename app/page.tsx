@@ -349,12 +349,12 @@ export default function HubPage() {
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
-                  {/* 크리스탈 아이콘(Higgsfield) — 검은 배경은 screen 블렌드로 유리 카드에 녹는다 */}
+                  {/* 크리스탈 아이콘(Higgsfield, 배경 제거) */}
                   <img
                     src={s.icon}
                     alt=""
                     aria-hidden="true"
-                    className="h-16 w-16 mix-blend-screen transition-transform duration-300 group-hover:scale-110"
+                    className="h-16 w-16 drop-shadow-[0_0_18px_rgba(76,141,255,0.35)] transition-transform duration-300 group-hover:scale-110"
                   />
                   <span
                     className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-extrabold ${
