@@ -30,6 +30,39 @@ function useScrollReveal() {
   }, []);
 }
 
+/** 스크롤 다이브 — 히어로 구간을 스크롤한 비율(0→1)을 --p 커스텀 속성으로 노출.
+ *  수면 위 빙산의 일각에서 → 수면 아래 시스템들로 "잠수"하는 패럴랙스에 쓰인다.
+ *  --p 는 상속되므로 섹션 하위 요소가 CSS calc 로 직접 참조한다. */
+function useDiveProgress(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    // 모션 최소화 선호 시엔 스크롤 연동을 끄고 CSS 미디어쿼리로 정적 표시
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const total = el.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-el.getBoundingClientRect().top, 0), Math.max(total, 1));
+      const prog = total > 0 ? scrolled / total : 0;
+      el.style.setProperty("--p", prog.toFixed(4));
+      // 충분히 잠수했을 때만 하단 카드/버튼 클릭 활성화 (겹침 오클릭 방지)
+      el.classList.toggle("is-deep", prog > 0.72);
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [ref]);
+}
+
 /** 숫자 카운트업 — "12,000+" 같은 문자열에서 숫자만 뽑아 올라가게 */
 function CountUp({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -114,14 +147,16 @@ const CATEGORY_COLOR: Record<WorkCategory, string> = {
 export default function HubPage() {
   const [filter, setFilter] = useState<(typeof WORK_CATEGORIES)[number]>("전체");
   const [menuOpen, setMenuOpen] = useState(false);
+  const diveRef = useRef<HTMLElement>(null);
   useScrollReveal();
+  useDiveProgress(diveRef);
 
   const visible = filter === "전체" ? WORKS : WORKS.filter((w) => w.category === filter);
 
   return (
     <main className="min-h-screen bg-navy text-ink">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-line bg-navy/90 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-line bg-navy/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5 md:px-10">
           <a href="/" className="flex items-center gap-2.5">
             {/* 빙산 로고 — 배경이 네이비라 사이트 배경과 이어져 보인다 */}
@@ -137,13 +172,13 @@ export default function HubPage() {
             <a href="#contact" className="transition hover:text-ink">문의</a>
             <a
               href={KMONG_PROFILE_URL}
-              className="rounded-lg bg-accent px-4 py-2 font-bold text-navy transition hover:brightness-110"
+              className="btn-primary rounded-lg px-4 py-2 font-bold text-navy"
             >
               크몽에서 만나기
             </a>
           </nav>
           <div className="flex items-center gap-3 lg:hidden">
-            <a href={KMONG_PROFILE_URL} className="rounded-lg bg-accent px-3.5 py-2 text-sm font-bold text-navy">
+            <a href={KMONG_PROFILE_URL} className="btn-primary rounded-lg px-3.5 py-2 text-sm font-bold text-navy">
               크몽에서 만나기
             </a>
             <button
@@ -173,71 +208,127 @@ export default function HubPage() {
         )}
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden px-6 pb-16 pt-20 text-center md:px-10 md:pt-28">
-        <div className="bg-dots pointer-events-none absolute inset-0" />
-        <div
-          className="pointer-events-none absolute -top-52 left-1/2 h-[480px] w-[820px] -translate-x-1/2 animate-glow"
-          style={{ background: "radial-gradient(ellipse at center, rgba(76,141,255,0.18), rgba(47,214,255,0.06) 55%, transparent 75%)" }}
-        />
-        {/* 대형 빙산 — 헤드라인 뒤에서 은은하게 부유 */}
-        <img
-          src="/logo.png?v=2"
-          alt=""
-          aria-hidden="true"
-          className="hero-iceberg pointer-events-none absolute left-1/2 top-6 h-[340px] w-[340px] opacity-[0.14] blur-[1.5px] md:top-2 md:h-[440px] md:w-[440px]"
-        />
-        <div className="relative mx-auto flex max-w-[860px] flex-col items-center gap-7">
-          <div className="rounded-full border border-[rgba(47,214,255,0.25)] bg-[rgba(47,214,255,0.07)] px-4 py-1.5 text-[13px] font-semibold text-cyan md:text-sm">
-            홈페이지 수정 · 업무 자동화 · AI 챗봇 구축
+      {/* Hero — 스크롤로 수면 아래 빙산으로 잠수하는 다이브 */}
+      <section ref={diveRef} className="dive relative">
+        <div className="dive-stage sticky top-0 flex h-screen items-center justify-center overflow-hidden text-center">
+          {/* 수면(위) → 심해(아래) 배경 */}
+          <div className="dive-water pointer-events-none absolute inset-0" />
+          {/* 빙산 씬(Higgsfield 생성) — 스크롤하면 씬이 위로 흘러 심해로 잠수 */}
+          <div className="dive-scene pointer-events-none">
+            <img src="/hero-berg.jpg" alt="" aria-hidden="true" />
           </div>
-          <h1 className="text-[38px] font-extrabold leading-[1.16] tracking-tighter md:text-[60px]">
-            직접 만들어 운영하는 개발자가
-            <br />
-            <span className="text-accent">필요한 것만 만들어드립니다.</span>
-          </h1>
-          <p className="max-w-[640px] text-[16px] leading-relaxed text-muted md:text-lg">
-            보이는 서비스는 빙산의 일각 — 수면 아래엔 매일 실제로 돌아가는 시스템들이 있습니다.
-            <br className="hidden md:block" />
-            문제은행 12,000+ · AI 튜터 · 자동 채점 · 출결. 전부 아래 작업사례에서 확인하실 수 있습니다.
-          </p>
-          <div className="mt-1 flex flex-col gap-3.5 sm:flex-row">
-            <a
-              href="#works"
-              className="rounded-xl bg-accent px-8 py-4 text-[17px] font-extrabold text-navy shadow-[0_8px_32px_rgba(76,141,255,0.3)] transition hover:brightness-110"
-            >
-              실제 작업사례 보기
-            </a>
-            <a
-              href={KMONG_PROFILE_URL}
-              className="rounded-xl border border-[rgba(148,178,255,0.25)] px-8 py-4 text-[17px] font-semibold text-ink transition hover:border-accent"
-            >
-              크몽에서 문의하기
-            </a>
-          </div>
-        </div>
+          <div className="bg-dots pointer-events-none absolute inset-0" />
+          {/* 수면에서 내리꽂히는 광선 */}
+          <div className="dive-rays pointer-events-none" />
+          {/* 내려갈수록 짙어지는 심해 */}
+          <div className="dive-abyss pointer-events-none absolute inset-0" />
+          {/* 잠수 깊이에 따라 씬 전체를 눌러주는 딤 */}
+          <div className="dive-dim pointer-events-none absolute inset-0" />
+          {/* 상단 글로우 */}
+          <div className="dive-glow pointer-events-none absolute left-1/2 top-[-12%] h-[520px] w-[860px]" />
 
-        {/* 숫자 증거 — 스크롤 진입 시 카운트업 */}
-        <div className="relative mx-auto mt-16 grid max-w-[860px] grid-cols-2 gap-4 md:grid-cols-4">
-          {STATS.map((s, i) => (
-            <div
-              key={s.label}
-              className="reveal card-hover rounded-2xl border border-line bg-card px-4 py-6"
-              style={{ transitionDelay: `${i * 90}ms` }}
-            >
-              <p className="text-[26px] font-extrabold tracking-tight text-accent md:text-[30px]">
-                <CountUp value={s.value} />
+          {/* 수심 게이지 — 잠수 진행 계기 (데스크톱) */}
+          <div className="dive-depth pointer-events-none hidden md:block">
+            <span className="dive-depth-top">SEA&nbsp;LV</span>
+            <span className="dive-depth-marker" />
+            <span className="dive-depth-bottom">DEEP</span>
+          </div>
+
+          {/* 헤드라인 가독 스크림 + 필름 그레인 */}
+          <div className="dive-scrim pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <div className="grain pointer-events-none absolute inset-0" />
+
+          {/* 상승 기포 */}
+          <div className="dive-bubbles pointer-events-none absolute inset-0">
+            {Array.from({ length: 16 }).map((_, i) => {
+              const size = 4 + (i % 4) * 3;
+              return (
+                <span
+                  key={i}
+                  style={{
+                    left: `${(i * 6.15 + 3) % 100}%`,
+                    width: size,
+                    height: size,
+                    animationDuration: `${7 + (i % 5) * 1.3}s`,
+                    animationDelay: `${-i * 0.8}s`,
+                  }}
+                />
+              );
+            })}
+          </div>
+
+          {/* 콘텐츠 — 진입 카피(위)와 수면 아래 카피(아래)가 스크롤로 교차 */}
+          <div className="relative z-10 mx-auto w-full max-w-[1140px] px-6 md:px-10">
+            {/* 진입 — 데스크톱: 왼쪽 정렬(빙산은 오른쪽), 모바일: 중앙 */}
+            <div className="dive-intro flex flex-col items-center gap-7 text-center md:max-w-[600px] md:items-start md:text-left">
+              <div className="rounded-full border border-[rgba(47,214,255,0.3)] bg-[rgba(8,18,38,0.65)] px-4 py-1.5 text-[13px] font-semibold text-cyan backdrop-blur-md md:text-sm">
+                ICEBERG · 직접 만들어 운영하는 개발자
+              </div>
+              <h1 className="text-[36px] font-extrabold leading-[1.18] tracking-tighter md:text-[56px] [text-shadow:0_2px_28px_rgba(3,8,20,0.65)]">
+                홈페이지 제작·수정부터
+                <br />
+                업무 자동화, <span className="text-ice">AI 챗봇 구축까지.</span>
+              </h1>
+              <p className="max-w-[560px] text-[16px] leading-relaxed text-soft md:text-lg">
+                필요한 것만, 빠르게 만들어드립니다.
+                <br className="hidden md:block" />
+                <span className="text-muted">지금 보이는 건 빙산의 일각 — 아래로 내려가 볼까요?</span>
               </p>
-              <p className="mt-1 text-[13px] font-semibold text-muted">{s.label}</p>
+              <div className="dive-cue mt-2 flex flex-col items-center gap-2 text-cyan">
+                <span className="text-[11px] font-bold tracking-[0.24em]">SCROLL</span>
+                <span className="dive-cue-arrow" />
+              </div>
             </div>
-          ))}
+
+            {/* 잠수 후 — 수면 아래 실제 시스템들 */}
+            <div className="dive-deep">
+              <p className="eyebrow mb-4 text-[12px] font-bold text-cyan">BELOW THE SURFACE</p>
+              <h2 className="mx-auto mb-4 max-w-[720px] text-[30px] font-extrabold leading-[1.16] tracking-tight md:text-[46px] [text-shadow:0_2px_28px_rgba(3,8,20,0.65)]">
+                수면 아래엔, 매일 실제로
+                <br className="hidden sm:block" /> 돌아가는 <span className="text-ice">시스템들</span>이 있습니다.
+              </h2>
+              <p className="mx-auto mb-9 max-w-[560px] text-[15px] leading-relaxed text-muted md:text-lg">
+                문제은행 12,000+ · AI 튜터 · 자동 채점 · 출결.
+                <br className="hidden md:block" />
+                전부 지금 실제 운영 중 — 아래 작업사례에서 직접 확인하실 수 있습니다.
+              </p>
+              <div className="dive-deep-body mx-auto grid max-w-[720px] grid-cols-2 gap-3 md:grid-cols-4">
+                {STATS.map((s) => (
+                  <div key={s.label} className="lux-card rounded-2xl px-4 py-5">
+                    <p className="text-[24px] font-extrabold tracking-tight text-accent md:text-[28px]">
+                      <CountUp value={s.value} />
+                    </p>
+                    <p className="mt-1 text-[12px] font-semibold text-muted">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="dive-deep-body mt-8 flex flex-col justify-center gap-3.5 sm:flex-row">
+                <a
+                  href="#works"
+                  className="btn-primary rounded-xl px-8 py-4 text-[17px] font-extrabold text-navy"
+                >
+                  실제 작업사례 보기
+                </a>
+                <a
+                  href={KMONG_PROFILE_URL}
+                  className="btn-ghost rounded-xl px-8 py-4 text-[17px] font-semibold text-ink"
+                >
+                  크몽에서 문의하기
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 서비스 (전단지들) */}
-      <section id="services" className="scroll-mt-20 border-t border-line bg-navy2 px-6 py-24 md:px-10 md:py-28">
+      <section
+        id="services"
+        className="scroll-mt-20 px-6 py-24 md:px-10 md:py-28"
+        style={{ background: "linear-gradient(180deg, #030812 0%, #0D1422 420px)" }}
+      >
         <div className="mx-auto max-w-[980px]">
-          <p className="mb-3 text-center text-sm font-bold tracking-wider text-cyan">SERVICES</p>
+          <p className="eyebrow mb-4 text-[12px] font-bold text-cyan">SERVICES</p>
           <h2 className="mx-auto mb-5 text-center text-[30px] font-extrabold tracking-tight md:text-[40px]">
             이런 일을 맡기실 수 있습니다
           </h2>
@@ -250,10 +341,8 @@ export default function HubPage() {
                 key={s.title}
                 href={s.href}
                 style={{ transitionDelay: `${i * 90}ms` }}
-                className={`reveal card-hover group flex flex-col gap-3 rounded-2xl p-8 ${
-                  s.live
-                    ? "border border-[rgba(47,214,255,0.4)] bg-card2"
-                    : "border border-line bg-card"
+                className={`reveal card-hover lux-card group flex flex-col gap-3 rounded-2xl p-8 ${
+                  s.live ? "!border-[rgba(47,214,255,0.35)]" : ""
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -279,7 +368,7 @@ export default function HubPage() {
       {/* 작업사례 갤러리 */}
       <section id="works" className="scroll-mt-20 border-t border-line px-6 py-24 md:px-10 md:py-28">
         <div className="mx-auto max-w-[980px]">
-          <p className="mb-3 text-center text-sm font-bold tracking-wider text-cyan">WORKS</p>
+          <p className="eyebrow mb-4 text-[12px] font-bold text-cyan">WORKS</p>
           <h2 className="mx-auto mb-5 text-center text-[30px] font-extrabold tracking-tight md:text-[40px]">
             작업사례
           </h2>
@@ -307,7 +396,7 @@ export default function HubPage() {
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {visible.map((w) => (
-              <div key={w.slug} className="card-hover flex flex-col gap-4 rounded-2xl border border-line bg-card p-8">
+              <div key={w.slug} className="card-hover lux-card flex flex-col gap-4 rounded-2xl p-8">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-[19px] font-extrabold leading-snug">{w.title}</p>
                   <div className="flex shrink-0 items-center gap-2">
@@ -371,7 +460,7 @@ export default function HubPage() {
           </p>
           <a
             href={KMONG_PROFILE_URL}
-            className="mt-1 rounded-xl bg-accent px-10 py-4 text-lg font-extrabold text-navy shadow-[0_8px_32px_rgba(76,141,255,0.3)] transition hover:brightness-110"
+            className="btn-primary mt-1 rounded-xl px-10 py-4 text-lg font-extrabold text-navy"
           >
             크몽에서 문의하기
           </a>

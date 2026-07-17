@@ -28,14 +28,296 @@ body {
   transform: none;
 }
 
-/* 히어로 빙산 — 천천히 떠다니는 부유감 */
-@keyframes floatSlow {
-  0%, 100% { transform: translate(-50%, 0) rotate(-1deg); }
-  50% { transform: translate(-50%, -16px) rotate(1deg); }
+/* ── 스크롤 다이브 히어로 ──────────────────────
+   섹션(.dive)에 --p(0→1) 가 스크롤 비율로 세팅되고, 하위 요소가 상속받아 사용.
+   빙산의 일각(위)에서 수면 아래 시스템(아래)으로 잠수하는 연출. */
+.dive {
+  --p: 0;
+  height: 280vh;            /* 잠수 스크롤 길이 */
 }
-.hero-iceberg {
-  animation: floatSlow 9s ease-in-out infinite;
+
+/* 수면 → 심해 세로 그라디언트 */
+.dive-water {
+  background: linear-gradient(180deg, #0a1b3e 0%, #0a2350 30%, #08163a 60%, #04091d 100%);
 }
+/* 내려갈수록 짙어지는 심해 비네트 */
+.dive-abyss {
+  background: radial-gradient(120% 85% at 50% -10%, transparent 28%, rgba(2, 6, 18, 0.92) 100%);
+  opacity: calc(0.22 + var(--p) * 0.78);
+}
+.dive-glow {
+  background: radial-gradient(ellipse at center, rgba(76, 141, 255, 0.2), rgba(47, 214, 255, 0.06) 55%, transparent 75%);
+  opacity: calc(1 - var(--p) * 0.72);
+  animation: glowPulse 8s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.06); }
+}
+
+/* 빙산 씬(생성 이미지) — 뷰포트보다 45% 크게 깔고, 스크롤하면 위로 흘러 잠수 */
+.dive-scene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 145%;
+  transform: translateY(calc(var(--p) * -31%)) scale(calc(1 + var(--p) * 0.08));
+  will-change: transform;
+  z-index: 0;
+}
+.dive-scene img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: sceneFloat 11s ease-in-out infinite;
+}
+/* 데스크톱 — 빙산을 오른쪽으로 밀어 왼쪽에 텍스트 자리를 만든다 */
+@media (min-width: 900px) {
+  .dive-scene img {
+    object-position: 12% 50%;
+  }
+}
+
+/* 잠수할수록 씬 전체를 지그시 눌러 깊은 단계 텍스트 대비 확보 */
+.dive-dim {
+  background: #030814;
+  opacity: calc(var(--p) * 0.52);
+  z-index: 1;
+}
+@keyframes sceneFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 진입 카피 — 잠수 시작하면 사라지며 위로 빠진다 */
+.dive-intro {
+  opacity: clamp(0, calc(1 - var(--p) * 3.2), 1);
+  transform: translateY(calc(var(--p) * -44px));
+}
+/* 수면 아래 카피 — 어느 정도 내려오면 떠오른다 */
+.dive-deep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  padding: 0 24px;
+  transform: translateY(calc(-50% + (1 - var(--p)) * 40px));
+  opacity: clamp(0, calc((var(--p) - 0.52) * 3), 1);
+}
+/* 완전히 떠오르기 전엔 카드/버튼 클릭 막기 (겹침 방지) */
+.dive-deep-body {
+  pointer-events: none;
+}
+.dive.is-deep .dive-deep-body {
+  pointer-events: auto;
+}
+
+/* 스크롤 유도 큐 */
+.dive-cue {
+  opacity: clamp(0, calc(1 - var(--p) * 6), 1);
+}
+.dive-cue-arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: cueBounce 1.6s ease-in-out infinite;
+}
+@keyframes cueBounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 0.5; }
+  50% { transform: rotate(45deg) translate(4px, 4px); opacity: 1; }
+}
+
+/* 상승 기포 */
+.dive-bubbles {
+  opacity: calc(0.3 + var(--p) * 0.55);
+  z-index: 1;
+}
+.dive-bubbles span {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 999px;
+  background: rgba(180, 220, 255, 0.12);
+  border: 1px solid rgba(190, 230, 255, 0.16);
+  filter: blur(0.6px);
+  animation-name: bubbleRise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes bubbleRise {
+  0% { transform: translateY(0) scale(0.7); opacity: 0; }
+  12% { opacity: 0.75; }
+  88% { opacity: 0.5; }
+  100% { transform: translateY(-104vh) scale(1.1); opacity: 0; }
+}
+
+/* 모션 최소화 선호 — 정적 히어로로 펼침 */
+@media (prefers-reduced-motion: reduce) {
+  .dive { height: auto; }
+  .dive-stage { position: static; display: block; height: auto; padding: 88px 0 96px; }
+  .dive-berg-img { transform: none; }
+  .dive-intro, .dive-deep { opacity: 1; transform: none; }
+  .dive-deep { position: static; margin-top: 56px; padding: 0 24px; }
+  .dive-deep-body { pointer-events: auto; }
+  .dive-bubbles, .dive-cue, .dive-glow, .dive-rays, .dive-depth, .dive-scrim, .dive-dim { display: none; }
+  .dive-scene { position: absolute; inset: 0; height: 100%; transform: none; opacity: 0.5; }
+  .dive-scene img { animation: none; }
+}
+
+/* ── 프리미엄 레이어: 빛 · 유리 · 입자 · 타이포 ─────────── */
+
+/* 신 레이 — 수면에서 심해로 내리꽂히는 광선. 내려갈수록 또렷해진다 */
+.dive-rays {
+  position: absolute;
+  inset: -12% -6%;
+  background: repeating-linear-gradient(
+    104deg,
+    transparent 0 90px,
+    rgba(158, 214, 255, 0.055) 130px,
+    transparent 190px
+  );
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 4%, rgba(0, 0, 0, 0.35) 55%, transparent 82%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 4%, rgba(0, 0, 0, 0.35) 55%, transparent 82%);
+  opacity: calc(0.4 + var(--p) * 0.45);
+  animation: raysSway 16s ease-in-out infinite alternate;
+  z-index: 0;
+}
+@keyframes raysSway {
+  0% { transform: translateX(-1.5%) skewX(0.4deg); }
+  100% { transform: translateX(1.5%) skewX(-0.4deg); }
+}
+
+/* 필름 그레인 — 미세 노이즈로 밋밋한 그라디언트에 질감 */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  z-index: 3;
+}
+
+/* 헤드라인 가독 스크림 — 모바일: 중앙 라디얼 / 데스크톱: 왼쪽 그라디언트 */
+.dive-scrim {
+  width: min(920px, 92vw);
+  height: 520px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(4, 9, 22, 0.62), rgba(4, 9, 22, 0.28) 55%, transparent 75%);
+  z-index: 2;
+}
+@media (min-width: 900px) {
+  .dive-scrim {
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(4, 9, 22, 0.72) 0%, rgba(4, 9, 22, 0.42) 36%, transparent 64%);
+  }
+}
+
+/* 수심 게이지 — 좌측에서 잠수 진행을 보여주는 계기 */
+.dive-depth {
+  position: absolute;
+  left: clamp(20px, 4vw, 56px);
+  top: 50%;
+  transform: translateY(-50%);
+  height: 44vh;
+  width: 1px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(150, 200, 255, 0.35) 0 1px,
+    transparent 1px calc(44vh / 10)
+  ), linear-gradient(180deg, rgba(150, 200, 255, 0.22), rgba(150, 200, 255, 0.08));
+  z-index: 4;
+}
+.dive-depth-marker {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--p) * 100%);
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  background: #7fd4ff;
+  box-shadow: 0 0 12px rgba(127, 212, 255, 0.9), 0 0 34px rgba(76, 141, 255, 0.5);
+}
+.dive-depth-top,
+.dive-depth-bottom {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: rgba(150, 200, 255, 0.6);
+  white-space: nowrap;
+}
+.dive-depth-top { top: -26px; }
+.dive-depth-bottom { bottom: -26px; }
+
+/* 아이스 그라디언트 타이포 — 헤드라인 키워드 */
+.text-ice {
+  background: linear-gradient(178deg, #ffffff 4%, #d7e8ff 38%, #93c7ff 68%, #5da3ff 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 24px rgba(20, 60, 140, 0.55));
+}
+
+/* 유리 카드 — 위 1px 하이라이트 + 블러 + 깊은 그림자 */
+.lux-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012) 58%), rgba(16, 22, 36, 0.78);
+  border: 1px solid rgba(148, 178, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 14px 44px rgba(2, 6, 18, 0.38);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* 주 버튼 — 그라디언트 + 호버 광택 스윕 */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #6aabff 0%, #4c8dff 46%, #37b8e8 120%);
+  box-shadow: 0 10px 36px rgba(76, 141, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, filter 0.3s ease;
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 42%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.65s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 16px 46px rgba(76, 141, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4); }
+.btn-primary:hover::after { left: 130%; }
+
+/* 보조 버튼 — 유리 고스트 */
+.btn-ghost {
+  border: 1px solid rgba(148, 178, 255, 0.22);
+  background: rgba(148, 178, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-ghost:hover { border-color: rgba(122, 180, 255, 0.55); background: rgba(148, 178, 255, 0.1); transform: translateY(-2px); }
+
+/* 섹션 라벨 — 양옆 장식선 */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  letter-spacing: 0.3em;
+}
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  height: 1px;
+  width: 42px;
+}
+.eyebrow::before { background: linear-gradient(90deg, transparent, rgba(47, 214, 255, 0.55)); }
+.eyebrow::after { background: linear-gradient(270deg, transparent, rgba(47, 214, 255, 0.55)); }
 
 /* 미세 도트 그리드 — 히어로 배경 깊이감 */
 .bg-dots {
