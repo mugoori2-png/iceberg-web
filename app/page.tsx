@@ -377,13 +377,13 @@ export default function HubPage() {
                   s.live ? "!border-[rgba(47,214,255,0.35)]" : ""
                 }`}
               >
-                <div className="flex items-start justify-between gap-3">
-                  {/* 크리스탈 아이콘(Higgsfield, 배경 제거) */}
+                <div className="flex items-center justify-between gap-3">
+                  {/* 크리스탈 아이콘(Higgsfield, 배경 제거·여백 크롭) */}
                   <img
-                    src={s.icon}
+                    src={s.icon + "?v=2"}
                     alt=""
                     aria-hidden="true"
-                    className="h-16 w-16 drop-shadow-[0_0_18px_rgba(76,141,255,0.35)] transition-transform duration-300 group-hover:scale-110"
+                    className="h-14 w-14 drop-shadow-[0_0_18px_rgba(76,141,255,0.35)] transition-transform duration-300 group-hover:scale-110"
                   />
                   <span
                     className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-extrabold ${
