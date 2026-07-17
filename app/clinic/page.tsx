@@ -164,8 +164,8 @@ function CtaButton({ children, secondary = false }: { children: React.ReactNode;
       href={KMONG_URL}
       className={
         secondary
-          ? "rounded-xl border border-[rgba(148,178,255,0.25)] px-8 py-4 text-[17px] font-semibold text-ink transition hover:border-accent"
-          : "rounded-xl bg-accent px-8 py-4 text-[17px] font-extrabold text-navy shadow-[0_8px_32px_rgba(76,141,255,0.3)] transition hover:brightness-110"
+          ? "btn-ghost rounded-xl px-8 py-4 text-[17px] font-semibold text-ink"
+          : "btn-primary rounded-xl px-8 py-4 text-[17px] font-extrabold text-navy"
       }
     >
       {children}
@@ -174,10 +174,10 @@ function CtaButton({ children, secondary = false }: { children: React.ReactNode;
 }
 
 function SectionLabel({ children, center = false }: { children: React.ReactNode; center?: boolean }) {
-  return (
-    <p className={`mb-3 text-sm font-bold tracking-wider text-cyan ${center ? "text-center" : ""}`}>
-      {children}
-    </p>
+  return center ? (
+    <p className="eyebrow mb-4 text-[12px] font-bold text-cyan">{children}</p>
+  ) : (
+    <p className="mb-3 text-sm font-bold tracking-wider text-cyan">{children}</p>
   );
 }
 
@@ -190,7 +190,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-navy text-ink">
       {/* 1. Header */}
-      <header className="sticky top-0 z-50 border-b border-line bg-navy/90 backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-line bg-navy/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5 md:px-10">
           <div className="flex items-center gap-2.5">
             <div className="flex h-[26px] w-[26px] items-center justify-center rounded-md bg-accent text-sm font-extrabold text-navy">
@@ -204,12 +204,12 @@ export default function Page() {
                 {l.label}
               </a>
             ))}
-            <a href={KMONG_URL} className="rounded-lg bg-accent px-4 py-2 font-bold text-navy transition hover:brightness-110">
+            <a href={KMONG_URL} className="btn-primary rounded-lg px-4 py-2 font-bold text-navy">
               크몽 문의하기
             </a>
           </nav>
           <div className="flex items-center gap-3 lg:hidden">
-            <a href={KMONG_URL} className="rounded-lg bg-accent px-3.5 py-2 text-sm font-bold text-navy">
+            <a href={KMONG_URL} className="btn-primary rounded-lg px-3.5 py-2 text-sm font-bold text-navy">
               크몽 문의하기
             </a>
             <button
@@ -261,7 +261,7 @@ export default function Page() {
           </p>
           <div className="mt-1 flex flex-col gap-3.5 sm:flex-row">
             <CtaButton>크몽 문의하기</CtaButton>
-            <a href="#pricing" className="rounded-xl border border-[rgba(148,178,255,0.25)] px-8 py-4 text-[17px] font-semibold text-ink transition hover:border-accent">
+            <a href="#pricing" className="btn-ghost rounded-xl px-8 py-4 text-[17px] font-semibold text-ink">
               가격 안내
             </a>
           </div>
@@ -272,10 +272,8 @@ export default function Page() {
           {HERO_CARDS.map((c) => (
             <div
               key={c.title}
-              className={`flex flex-col gap-2 rounded-2xl p-6 ${
-                c.highlight
-                  ? "border border-[rgba(47,214,255,0.45)] bg-card2"
-                  : "border border-[rgba(148,178,255,0.14)] bg-card"
+              className={`lux-card card-hover flex flex-col gap-2 rounded-2xl p-6 ${
+                c.highlight ? "!border-[rgba(47,214,255,0.4)]" : ""
               }`}
             >
               <div
@@ -448,7 +446,7 @@ export default function Page() {
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {SERVICES.map((s) => (
-              <div key={s.title} className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-8">
+              <div key={s.title} className="lux-card card-hover flex flex-col gap-3 rounded-2xl p-8">
                 <p className="text-[19px] font-bold text-accent">{s.title}</p>
                 <p className="text-[15px] leading-relaxed text-muted">{s.desc}</p>
               </div>
@@ -466,10 +464,8 @@ export default function Page() {
             {SCOPE_ITEMS.map((item) => (
               <div
                 key={item.label}
-                className={`rounded-xl px-5 py-5 text-[15px] ${
-                  item.highlight
-                    ? "border border-[rgba(47,214,255,0.4)] bg-card font-bold text-cyan"
-                    : "border border-line bg-card font-semibold"
+                className={`lux-card rounded-xl px-5 py-5 text-[15px] ${
+                  item.highlight ? "!border-[rgba(47,214,255,0.4)] font-bold text-cyan" : "font-semibold"
                 }`}
               >
                 {item.label}
@@ -613,7 +609,7 @@ export default function Page() {
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {PORTFOLIO_CASES.map((c) => (
-              <div key={c.title} className="flex flex-col gap-4 rounded-2xl border border-line bg-card p-8">
+              <div key={c.title} className="lux-card card-hover flex flex-col gap-4 rounded-2xl p-8">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-[19px] font-extrabold">{c.title}</p>
                   <span className="shrink-0 rounded-full border border-[rgba(148,178,255,0.2)] px-2.5 py-1 text-[11px] font-bold text-dim">
@@ -657,7 +653,7 @@ export default function Page() {
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {TRUST_CARDS.map((t) => (
-              <div key={t.title} className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-8">
+              <div key={t.title} className="lux-card card-hover flex flex-col gap-3 rounded-2xl p-8">
                 <p className="text-[18px] font-bold text-accent">{t.title}</p>
                 <p className="text-[15px] leading-[1.7] text-muted">{t.desc}</p>
               </div>
@@ -713,8 +709,8 @@ export default function Page() {
             {TIERS.map((t) => (
               <div
                 key={t.name}
-                className={`relative flex flex-col gap-4 rounded-2xl p-8 ${
-                  t.recommended ? "border border-accent bg-card2" : "border border-[rgba(148,178,255,0.14)] bg-card"
+                className={`lux-card card-hover relative flex flex-col gap-4 rounded-2xl p-8 ${
+                  t.recommended ? "!border-accent" : ""
                 }`}
               >
                 {t.recommended && (
@@ -737,10 +733,8 @@ export default function Page() {
                 </ul>
                 <a
                   href={KMONG_URL}
-                  className={`block rounded-lg py-3 text-center text-[15px] font-bold transition ${
-                    t.recommended
-                      ? "bg-accent text-navy hover:brightness-110"
-                      : "border border-[rgba(148,178,255,0.25)] text-ink hover:border-accent"
+                  className={`block rounded-lg py-3 text-center text-[15px] font-bold ${
+                    t.recommended ? "btn-primary text-navy" : "btn-ghost text-ink"
                   }`}
                 >
                   문의하기
@@ -754,7 +748,7 @@ export default function Page() {
             <strong className="font-bold text-soft">필요한 범위부터 현실적으로 제안</strong>드립니다.
           </p>
 
-          <div className="mt-6 flex flex-col items-start gap-3 rounded-xl border border-[rgba(47,214,255,0.3)] bg-card px-7 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
+          <div className="lux-card mt-6 flex flex-col items-start gap-3 rounded-xl !border-[rgba(47,214,255,0.3)] px-7 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
             <p className="text-[15px] text-soft">
               <strong className="text-cyan">유지보수 월 구독</strong> — 자주 고칠 일이 있다면, 매달 정해진 비용으로
               필요한 수정을 맡기세요.
@@ -775,7 +769,7 @@ export default function Page() {
           </h2>
           <div className="flex flex-col gap-2.5">
             {FAQS.map((f, i) => (
-              <div key={i} className="rounded-xl border border-line bg-card px-6 py-5">
+              <div key={i} className="lux-card rounded-xl px-6 py-5">
                 <button
                   type="button"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -816,7 +810,7 @@ export default function Page() {
           </p>
           <a
             href={KMONG_URL}
-            className="mt-1 rounded-xl bg-accent px-10 py-4 text-lg font-extrabold text-navy shadow-[0_8px_32px_rgba(76,141,255,0.3)] transition hover:brightness-110"
+            className="btn-primary mt-1 rounded-xl px-10 py-4 text-lg font-extrabold text-navy"
           >
             크몽 문의하기
           </a>

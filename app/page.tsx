@@ -113,6 +113,7 @@ const SERVICES = [
     href: "/clinic",
     status: "판매 중",
     live: true,
+    icon: "/icons/clinic.png",
   },
   {
     title: "맞춤형 AI 챗봇 구축",
@@ -120,6 +121,7 @@ const SERVICES = [
     href: KMONG_PROFILE_URL,
     status: "준비 중",
     live: false,
+    icon: "/icons/chatbot.png",
   },
   {
     title: "업무 자동화 프로그램",
@@ -127,6 +129,7 @@ const SERVICES = [
     href: KMONG_PROFILE_URL,
     status: "준비 중",
     live: false,
+    icon: "/icons/automation.png",
   },
 ];
 
@@ -345,8 +348,14 @@ export default function HubPage() {
                   s.live ? "!border-[rgba(47,214,255,0.35)]" : ""
                 }`}
               >
-                <div className="flex items-center justify-between gap-3">
-                  <p className={`text-[19px] font-extrabold ${s.live ? "text-cyan" : ""}`}>{s.title}</p>
+                <div className="flex items-start justify-between gap-3">
+                  {/* 크리스탈 아이콘(Higgsfield) — 검은 배경은 screen 블렌드로 유리 카드에 녹는다 */}
+                  <img
+                    src={s.icon}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-16 w-16 mix-blend-screen transition-transform duration-300 group-hover:scale-110"
+                  />
                   <span
                     className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-extrabold ${
                       s.live ? "bg-cyan text-navy" : "border border-line text-dim"
@@ -355,6 +364,7 @@ export default function HubPage() {
                     {s.status}
                   </span>
                 </div>
+                <p className={`text-[19px] font-extrabold ${s.live ? "text-cyan" : ""}`}>{s.title}</p>
                 <p className="text-[15px] leading-relaxed text-muted">{s.desc}</p>
                 <span className={`mt-auto pt-2 text-sm font-bold ${s.live ? "text-cyan" : "text-dim"}`}>
                   {s.live ? "자세히 보기 →" : "곧 열립니다"}
