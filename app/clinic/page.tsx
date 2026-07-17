@@ -192,11 +192,16 @@ export default function Page() {
       {/* 1. Header */}
       <header className="sticky top-0 z-50 border-b border-line bg-navy/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5 md:px-10">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-[26px] w-[26px] items-center justify-center rounded-md bg-accent text-sm font-extrabold text-navy">
-              +
-            </div>
-            <span className="text-[17px] font-bold tracking-tight">홈페이지 수정 클리닉</span>
+          <div className="flex items-center gap-3">
+            <a href="/" className="flex items-center gap-2.5">
+              <img src="/logo.png?v=2" alt="ICEBERG" className="h-[30px] w-[30px]" />
+              <span className="flex flex-col leading-none">
+                <span className="text-[17px] font-extrabold tracking-tight">ICEBERG</span>
+                <span className="mt-0.5 text-[9px] font-semibold tracking-[0.14em] text-dim">Idea · Code · Execute</span>
+              </span>
+            </a>
+            <span className="hidden h-5 w-px bg-[rgba(148,178,255,0.2)] sm:block" />
+            <span className="hidden text-[15px] font-bold text-soft sm:block">홈페이지 수정 클리닉</span>
           </div>
           <nav className="hidden items-center gap-6 text-sm text-muted lg:flex">
             {NAV_LINKS.map((l) => (

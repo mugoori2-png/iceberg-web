@@ -152,17 +152,17 @@ const SERVICES = [
   {
     title: "맞춤형 AI 챗봇 구축",
     desc: "회사 자료로 답하는 AI 챗봇 — 출처 인용, 모르면 답하지 않는 안전장치까지.",
-    href: KMONG_PROFILE_URL,
-    status: "준비 중",
-    live: false,
+    href: "/chatbot",
+    status: "판매 중",
+    live: true,
     icon: "/icons/chatbot.png",
   },
   {
     title: "업무 자동화 프로그램",
     desc: "엑셀 정리, 문서 대량 생성, 반복 업무 — 매일 하는 일을 클릭 한 번으로.",
-    href: KMONG_PROFILE_URL,
-    status: "준비 중",
-    live: false,
+    href: "/automation",
+    status: "판매 중",
+    live: true,
     icon: "/icons/automation.png",
   },
 ];

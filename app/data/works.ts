@@ -36,6 +36,7 @@ export const WORKS: WorkCase[] = [
     result: "학원 앱에 탑재되어 실서비스 운영 중 — 출처 인용 답변, 미답변 질문은 강사 연결",
     tags: ["RAG 챗봇", "출처 인용", "관리자 검수"],
     live: true,
+    serviceHref: "/chatbot",
   },
   {
     slug: "omr-auto-grading",
@@ -46,6 +47,7 @@ export const WORKS: WorkCase[] = [
     result: "195명 분량 채점을 분 단위로 단축, 채점 실수 0",
     tags: ["이미지 판독", "자동 채점", "엑셀 집계"],
     live: true,
+    serviceHref: "/automation",
   },
   {
     slug: "hwpx-exam-generator",
@@ -57,6 +59,7 @@ export const WORKS: WorkCase[] = [
     result: "시험지 세트 제작 몇 시간 → 클릭 1번",
     tags: ["한글 문서 자동화", "HWPX", "문제은행"],
     live: true,
+    serviceHref: "/automation",
   },
   {
     slug: "qr-attendance-kiosk",
