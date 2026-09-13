@@ -26,6 +26,7 @@ export interface WorkCase {
 export const WORK_CATEGORIES: ("전체" | WorkCategory)[] = ["전체", "AI", "자동화", "웹·앱", "수정"];
 
 export const WORKS: WorkCase[] = [
+  { slug: "academy-management", title: "학원 통합 관리 시스템", category: "웹·앱", problem: "학생 정보와 출결·성적을 각각 관리하면 운영 현황을 한눈에 파악하기 어렵다.", solution: "React·Supabase 기반으로 학생·출결·성적 관리와 관리자 대시보드를 직접 개발.", result: "학원 운영에 사용하는 관리 시스템으로 개발·운영", tags: ["학생 관리", "출결·성적", "관리자 대시보드"], live: true, serviceHref: "/programs" },
   {
     slug: "ai-tutor-dbbot",
     title: "교재 기반 AI 학습 튜터 챗봇",
@@ -44,7 +45,7 @@ export const WORKS: WorkCase[] = [
     category: "자동화",
     problem: "인성검사 답안지 수백 장을 손으로 채점하면 반나절이 걸리고 실수가 생긴다.",
     solution: "답안지 스캔 이미지를 판독해 마킹을 인식하고 자동 채점·집계하는 파이프라인 제작.",
-    result: "195명 분량 채점을 분 단위로 단축, 채점 실수 0",
+    result: "스캔 답안지 마킹 인식부터 자동 채점·엑셀 집계까지 연결",
     tags: ["이미지 판독", "자동 채점", "엑셀 집계"],
     live: true,
     serviceHref: "/automation",

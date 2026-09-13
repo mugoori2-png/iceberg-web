@@ -1,5 +1,6 @@
 "use client";
 
+import { QuickStart, AboutSection, ProcessSection } from "./components/BusinessSections";
 import { useEffect, useRef, useState } from "react";
 import { WORKS, WORK_CATEGORIES, type WorkCategory } from "./data/works";
 
@@ -141,11 +142,12 @@ const KMONG_PROFILE_URL = "https://kmong.com/@김주루";
 
 /** 판매 중/준비 중 서비스(전단지) 목록 — 크몽 상품이 늘면 여기에 추가 */
 const SERVICES = [
+  { title: "학원·맞춤 관리 프로그램", desc: "학생·출결·성적 관리 경험을 바탕으로, 우리 업무에 맞는 관리 도구를 만듭니다.", href: "/programs", status: "맞춤 상담", live: true, icon: "/icons/automation.png" },
   {
     title: "홈페이지 수정 클리닉",
     desc: "문구·이미지·버튼·모바일 깨짐, 필요한 곳만 빠르게 고칩니다.",
     href: "/clinic",
-    status: "판매 중",
+    status: "크몽 등록 상품",
     live: true,
     icon: "/icons/clinic.png",
   },
@@ -153,7 +155,7 @@ const SERVICES = [
     title: "맞춤형 AI 챗봇 구축",
     desc: "회사 자료로 답하는 AI 챗봇 — 출처 인용, 모르면 답하지 않는 안전장치까지.",
     href: "/chatbot",
-    status: "판매 중",
+    status: "맞춤 상담",
     live: true,
     icon: "/icons/chatbot.png",
   },
@@ -161,7 +163,7 @@ const SERVICES = [
     title: "업무 자동화 프로그램",
     desc: "엑셀 정리, 문서 대량 생성, 반복 업무 — 매일 하는 일을 클릭 한 번으로.",
     href: "/automation",
-    status: "판매 중",
+    status: "맞춤 상담",
     live: true,
     icon: "/icons/automation.png",
   },
@@ -206,6 +208,8 @@ export default function HubPage() {
             </span>
           </a>
           <nav className="hidden items-center gap-6 text-sm text-muted lg:flex">
+            <a href="#start" className="transition hover:text-ink">작은 수정</a>
+            <a href="#about" className="transition hover:text-ink">개발자 소개</a>
             <a href="#services" className="transition hover:text-ink">서비스</a>
             <a href="#works" className="transition hover:text-ink">작업사례</a>
             <a href="#contact" className="transition hover:text-ink">문의</a>
@@ -235,6 +239,8 @@ export default function HubPage() {
         {menuOpen && (
           <div className="border-t border-line bg-navy px-6 py-3 lg:hidden">
             {[
+              { label: "작은 수정", href: "#start" },
+              { label: "개발자 소개", href: "#about" },
               { label: "서비스", href: "#services" },
               { label: "작업사례", href: "#works" },
               { label: "문의", href: "#contact" },
@@ -299,12 +305,12 @@ export default function HubPage() {
               <h1 className="text-[36px] font-extrabold leading-[1.18] tracking-tighter md:text-[56px] [text-shadow:0_2px_28px_rgba(3,8,20,0.65)]">
                 홈페이지 제작·수정부터
                 <br />
-                업무 자동화, <span className="text-ice">AI 챗봇 구축까지.</span>
+                <span className="text-ice">맞춤 프로그램까지.</span>
               </h1>
               <p className="max-w-[560px] text-[16px] leading-relaxed text-soft md:text-lg">
-                필요한 것만, 빠르게 만들어드립니다.
+                문구·이미지 교체, 화면 오류 해결부터 시작하세요.
                 <br className="hidden md:block" />
-                <span className="text-muted">지금 보이는 건 빙산의 일각 — 아래로 내려가 볼까요?</span>
+                <span className="text-muted">학원 관리와 업무 자동화 경험을 바탕으로 필요한 곳을 고칩니다.</span>
               </p>
               <div className="dive-cue mt-2 flex flex-col items-center gap-2 text-cyan">
                 <span className="text-[11px] font-bold tracking-[0.24em]">SCROLL</span>
@@ -353,6 +359,8 @@ export default function HubPage() {
         </div>
       </section>
 
+      <QuickStart />
+      <AboutSection />
       {/* 서비스 (전단지들) */}
       <section
         id="services"
@@ -367,7 +375,7 @@ export default function HubPage() {
           <p className="mx-auto mb-14 max-w-[560px] text-center text-[16px] leading-[1.7] text-muted">
             작은 수정부터 시작해서, 자동화·AI까지 필요한 만큼만.
           </p>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {SERVICES.map((s, i) => (
               <a
                 key={s.title}
@@ -412,7 +420,7 @@ export default function HubPage() {
             작업사례
           </h2>
           <p className="mx-auto mb-10 max-w-[560px] text-center text-[16px] leading-[1.7] text-muted">
-            데모가 아니라 실제로 운영 중인 것들입니다. 문제 → 해결 → 결과 순서로 정리했습니다.
+            자체 개발·운영 경험과 제공 서비스를 정리했습니다. 각 사례에서 문제와 구현 방법을 확인하세요.
           </p>
 
           {/* 카테고리 필터 */}
@@ -461,6 +469,7 @@ export default function HubPage() {
                     결과 — {w.result}
                   </p>
                 </div>
+                <a href={`/works/${w.slug}`} className="font-bold text-cyan">사례 자세히 보기 →</a>
                 <div className="mt-auto flex flex-wrap items-center gap-2 pt-1">
                   {w.tags.map((t) => (
                     <span key={t} className="rounded-md bg-well px-2 py-1 text-[12px] font-semibold text-cyan">
@@ -482,6 +491,7 @@ export default function HubPage() {
         </div>
       </section>
 
+      <ProcessSection />
       {/* CTA */}
       <section id="contact" className="relative scroll-mt-20 overflow-hidden border-t border-line bg-navy2 px-6 py-28 md:px-10">
         <div
