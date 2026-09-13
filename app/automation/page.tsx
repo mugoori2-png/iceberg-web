@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import TimeValue from "../components/TimeValue";
 
 // ─────────────────────────────────────────────
 // CTA 링크: 크몽 상품 링크가 생기면 여기만 바꾸면 됩니다.
@@ -8,22 +9,22 @@ const KMONG_URL = "https://kmong.com/@김주루"; // 업무 자동화 상품 상
 // ─────────────────────────────────────────────
 
 const PAIN_POINTS = [
-  "매주 같은 엑셀 정리를 몇 시간씩 반복하고 있다",
+  "한글 문서에 같은 내용을 넣고 서식을 맞추는 일을 반복하고 있다",
   "같은 내용의 문서를 수십·수백 장씩 하나하나 만들고 있다",
   "여러 파일에 흩어진 데이터를 손으로 옮겨 붙이다 실수가 난다",
   "이 일을 자동으로 할 수 있을 것 같은데, 누구에게 맡겨야 할지 모르겠다",
 ];
 
 const HERO_CARDS = [
-  { title: "엑셀 자동 정리", desc: "취합, 분류, 집계, 서식 정리 — 반복되는 엑셀 작업을 클릭 한 번으로.", highlight: false },
-  { title: "문서 대량 생성", desc: "한글(HWP)·워드·PDF 문서를 데이터에서 자동으로 수십·수백 장 생성.", highlight: true },
+  { title: "한글 HWPX 자동화", desc: "정해진 양식 채우기, 시험지·정답지·해설지 등 반복 문서 생성.", highlight: true },
+  { title: "엑셀·자료 정리", desc: "취합, 분류, 집계처럼 매번 같은 순서로 처리하는 작업.", highlight: false },
   { title: "이미지 · 파일 처리", desc: "스캔 이미지 판독, 파일 이름 정리, 폴더 분류까지 자동으로.", highlight: false },
   { title: "업무 파이프라인", desc: "여러 단계를 한 흐름으로 묶어 시작부터 끝까지 자동으로 흘러가게.", highlight: true },
 ];
 
 const SERVICES = [
   { title: "단일 작업 자동화", desc: "엑셀 정리, 파일 변환처럼 하나의 반복 작업을 프로그램으로 만듭니다." },
-  { title: "문서 자동 생성", desc: "데이터만 넣으면 한글(HWP)·워드 문서가 규격대로 나오는 생성기를 만듭니다." },
+  { title: "문서 자동 생성", desc: "데이터만 넣으면 한글(HWPX)·워드 문서가 규격대로 나오는 생성기를 만듭니다." },
   { title: "업무 전체 자동화", desc: "입력 → 처리 → 문서 → 정리까지 여러 단계를 하나의 흐름으로 묶습니다." },
 ];
 
@@ -50,20 +51,20 @@ const TIERS = [
     name: "단일 자동화",
     tagline: "반복 작업 하나부터",
     price: "20만원",
-    features: ["엑셀 정리 · 취합 자동화", "파일 변환 · 정리", "실행 프로그램 전달", "사용법 안내"],
+    features: ["입력·처리 규칙·결과 각 1종", "HWPX 1쪽·고정 항목 10개 이내 등", "7일 · 합의 범위 수정 2회", "실행 구성 파일과 사용 안내"],
     recommended: false,
   },
   {
     name: "문서 자동 생성",
     tagline: "데이터 → 문서 대량 생성",
-    price: "50만원",
-    features: ["한글(HWP) · 워드 자동 생성", "서식 · 규격 맞춤", "대량 생성 (수백 장)", "실제 파일로 검수"],
+    price: "개별 견적",
+    features: ["한글(HWPX) · 워드 자동 생성", "서식 · 규격 맞춤", "대량 생성 (수백 장)", "실제 파일로 검수"],
     recommended: true,
   },
   {
     name: "업무 전체 자동화",
     tagline: "시작부터 끝까지 한 흐름",
-    price: "100만원",
+    price: "개별 견적",
     features: ["여러 단계 파이프라인 구축", "AI 결합 (분류 · 요약 등)", "관리 화면 (필요시)", "운영 정착 지원"],
     recommended: false,
   },
@@ -75,8 +76,8 @@ const FAQS = [
     a: "지금 하시는 작업을 그대로 설명해주시면 됩니다. '이 파일을 열어서, 이걸 복사해서, 여기 붙인다' 수준이면 충분합니다. 자동화가 어렵거나 효율이 안 나오는 일이면 솔직하게 안 된다고 말씀드립니다.",
   },
   {
-    q: "한글(HWP) 문서도 정말 되나요?",
-    a: "네, 가장 자신 있는 분야입니다. 문제은행 데이터에서 시험지·정답지·해설지 한글 문서 3종을 클릭 한 번에 생성하는 시스템을 직접 만들어 실무에서 운영 중입니다.",
+    q: "한글(HWPX) 문서도 정말 되나요?",
+    a: "한글 HWPX 시험지·정답지·해설지 생성 경험이 있습니다. 원본 HWP는 HWPX 변환 가능 여부와 서식 보존 상태를 먼저 확인합니다. 문서 구조와 표·쪽 구성에 따라 제작 범위가 달라집니다.",
   },
   {
     q: "프로그램을 받으면 어떻게 쓰나요?",
@@ -118,7 +119,7 @@ const PORTFOLIO_CASES = [
     live: true,
   },
   {
-    title: "한글(HWP) 시험지 자동 생성 (실운영)",
+    title: "한글(HWPX) 시험지 자동 생성 (실운영)",
     desc: "문제 데이터에서 시험지·정답지·해설지 3종 한글 문서를 클릭 한 번에 생성합니다.",
     works: ["HWPX 문서 생성", "보기 순서 섞기", "해설 번호 자동 재정렬", "정답 색상 표기"],
     tags: ["#한글자동화", "#대량생성", "#실운영"],
@@ -146,8 +147,8 @@ const TRUST_CARDS = [
     desc: "판매용 데모가 아니라, 학원 운영 실무에서 매일 돌아가는 자동화(채점·문서 생성·집계)를 직접 만들어 쓰고 있습니다. 실무에서 안 깨지는 기준으로 만듭니다.",
   },
   {
-    title: "한글(HWP) 문서 전문",
-    desc: "국내 실무의 핵심인 한글 문서 자동화를 깊게 다뤄왔습니다. 서식이 밀리지 않는 규격 문서를 데이터에서 바로 뽑아냅니다.",
+    title: "한글(HWPX) 문서 전문",
+    desc: "국내 실무의 핵심인 한글 문서 자동화를 깊게 다뤄왔습니다. 제공된 양식을 기준으로 문서를 생성하고 표·쪽 구성과 결과를 검수합니다.",
   },
   {
     title: "쓰는 사람 기준의 결과물",
@@ -259,12 +260,12 @@ export default function Page() {
             학원 · 사무직 · 소상공인 · 자영업 — 실무에서 매일 돌아가는 자동화 경험으로 만듭니다
           </div>
           <h1 className="text-[40px] font-extrabold leading-[1.14] tracking-tighter md:text-[64px] lg:text-[72px]">
-            매일 반복하는 그 일,
+            반복 업무에 쓰던 시간,
             <br />
-            <span className="text-accent">클릭 한 번으로 끝나게 만듭니다.</span>
+            <span className="text-accent">중요한 일에 쓰세요.</span>
           </h1>
           <p className="max-w-[640px] text-[17px] leading-relaxed text-muted md:text-xl">
-            엑셀 정리, 한글·워드 문서 대량 생성, 데이터 취합 — 사람이 반복하던 일을 프로그램에 맡기세요.
+            한글 HWPX 문서 생성, 엑셀 정리, 파일 취합과 반복 입력. 매일 번거로운 일을 줄이는 프로그램을 만듭니다.
             <br className="hidden md:block" /> 지금 하시는 작업을 설명만 해주시면 자동화 가능 여부를 확인해드립니다.
           </p>
           <div className="mt-1 flex flex-col gap-3.5 sm:flex-row">
@@ -299,59 +300,12 @@ export default function Page() {
           ))}
         </div>
 
-        {/* Before/After 시간 비교 mockup */}
-        <div className="relative mx-auto mt-20 max-w-[720px]">
-          <div
-            className="pointer-events-none absolute -inset-10"
-            style={{ background: "radial-gradient(ellipse at center, rgba(76,141,255,0.12), transparent 70%)" }}
-          />
-          <div className="relative overflow-hidden rounded-2xl border border-[rgba(148,178,255,0.18)] bg-card text-left shadow-[0_40px_80px_rgba(0,0,0,0.55)]">
-            <div className="flex items-center gap-2.5 border-b border-line bg-[#0D1220] px-5 py-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-[12px] font-extrabold text-navy">
-                ▶
-              </div>
-              <p className="text-[14px] font-bold">자동화 실행 — 답안지 195장 채점</p>
-            </div>
-            <div className="flex flex-col gap-5 p-6 md:p-8">
-              {/* Before */}
-              <div>
-                <div className="mb-2 flex items-center justify-between text-[13px]">
-                  <span className="font-bold text-dim">수작업</span>
-                  <span className="font-extrabold text-dim">반나절 (4시간+)</span>
-                </div>
-                <div className="h-3 overflow-hidden rounded-full bg-well">
-                  <div className="h-full w-full rounded-full bg-bar3" />
-                </div>
-              </div>
-              {/* After */}
-              <div>
-                <div className="mb-2 flex items-center justify-between text-[13px]">
-                  <span className="font-bold text-cyan">자동화 프로그램</span>
-                  <span className="font-extrabold text-cyan">2분 30초 · 실수 0</span>
-                </div>
-                <div className="h-3 overflow-hidden rounded-full bg-well">
-                  <div className="h-full w-[3%] min-w-[24px] rounded-full bg-cyan shadow-[0_0_12px_rgba(47,214,255,0.6)]" />
-                </div>
-              </div>
-              <div className="mt-1 grid grid-cols-3 gap-3 border-t border-line pt-5 text-center">
-                <div>
-                  <p className="text-[22px] font-extrabold text-ink">195장</p>
-                  <p className="text-[12px] text-dim">처리량</p>
-                </div>
-                <div>
-                  <p className="text-[22px] font-extrabold text-ink">2.5분</p>
-                  <p className="text-[12px] text-dim">소요 시간</p>
-                </div>
-                <div>
-                  <p className="text-[22px] font-extrabold text-cyan">0건</p>
-                  <p className="text-[12px] text-dim">채점 실수</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p className="mt-4 text-center text-[12.5px] text-dim">* 실제 운영 중인 OMR 자동 채점 시스템 기준</p>
-        </div>
+        <figure className="mx-auto mt-14 max-w-[720px]">
+          <img src="/brand/hwpx-service.png" alt="ICEBERG 한글 HWPX 문서 자동화 — 시험지·서식·반복 문서" width="1448" height="1086" className="w-full rounded-2xl border border-line" />
+          <figcaption className="mt-3 text-xs text-dim">서비스 소개를 위한 브랜드 이미지입니다.</figcaption>
+        </figure>
       </section>
+      <TimeValue />
 
       {/* 3. 문제 공감 */}
       <section className="border-t border-line bg-navy2 px-6 py-24 md:px-10 md:py-28">
@@ -559,7 +513,7 @@ export default function Page() {
                 </div>
                 <p className="text-[32px] font-extrabold tracking-tight">
                   {t.price}
-                  <span className="text-[15px] font-semibold text-muted">부터</span>
+                  {t.price !== "개별 견적" && <span className="text-[15px] font-semibold text-muted">부터</span>}
                 </p>
                 <ul className="flex flex-1 flex-col gap-2 text-[14.5px] text-soft">
                   {t.features.map((f) => (
@@ -661,7 +615,7 @@ export default function Page() {
       {/* 12. Footer */}
       <footer className="flex flex-col gap-2 border-t border-line px-6 py-7 text-[13px] text-dim sm:flex-row sm:justify-between md:px-10">
         <span>© 2026 업무 자동화 프로그램 · <a href="/" className="transition hover:text-soft">ICEBERG</a></span>
-        <span>업무 자동화 · 엑셀 자동화 · 한글(HWP) 문서 자동 생성</span>
+        <span>업무 자동화 · 엑셀 자동화 · 한글(HWPX) 문서 자동 생성</span>
       </footer>
     </main>
   );

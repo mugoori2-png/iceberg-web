@@ -1,5 +1,6 @@
 "use client";
 
+import TimeValue from "./components/TimeValue";
 import { QuickStart, AboutSection, ProcessSection } from "./components/BusinessSections";
 import { useEffect, useRef, useState } from "react";
 import { WORKS, WORK_CATEGORIES, type WorkCategory } from "./data/works";
@@ -160,8 +161,8 @@ const SERVICES = [
     icon: "/icons/chatbot.png",
   },
   {
-    title: "업무 자동화 프로그램",
-    desc: "엑셀 정리, 문서 대량 생성, 반복 업무 — 매일 하는 일을 클릭 한 번으로.",
+    title: "한글 HWPX·업무 자동화",
+    desc: "한글 문서 생성, 엑셀·파일 정리. 반복 업무에 쓰는 시간을 줄여드립니다.",
     href: "/automation",
     status: "맞춤 상담",
     live: true,
@@ -310,7 +311,7 @@ export default function HubPage() {
               <p className="max-w-[560px] text-[16px] leading-relaxed text-soft md:text-lg">
                 문구·이미지 교체, 화면 오류 해결부터 시작하세요.
                 <br className="hidden md:block" />
-                <span className="text-muted">학원 관리와 업무 자동화 경험을 바탕으로 필요한 곳을 고칩니다.</span>
+                <span className="text-muted">학원 관리와 한글 HWPX·업무 자동화로 반복하는 시간을 줄입니다.</span>
               </p>
               <div className="dive-cue mt-2 flex flex-col items-center gap-2 text-cyan">
                 <span className="text-[11px] font-bold tracking-[0.24em]">SCROLL</span>
@@ -361,6 +362,7 @@ export default function HubPage() {
 
       <QuickStart />
       <AboutSection />
+      <TimeValue />
       {/* 서비스 (전단지들) */}
       <section
         id="services"
