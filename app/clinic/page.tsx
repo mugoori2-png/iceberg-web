@@ -34,7 +34,7 @@ const SCOPE_ITEMS = [
   { label: "모바일 반응형 오류 수정", highlight: true },
   { label: "섹션 추가 · 삭제" },
   { label: "랜딩페이지 흐름 개선", highlight: true },
-  { label: "간단한 디자인 정리" },
+  { label: "네이버 블로그·카페 꾸미기" },
   { label: "유지보수 월 구독" },
 ];
 
@@ -50,7 +50,7 @@ const TIERS = [
     name: "간단 수정",
     tagline: "크몽 상품 상세 범위 기준",
     price: "5,000원부터",
-    features: ["텍스트 수정", "이미지 교체", "버튼 · 링크 수정", "오타 · 문구 변경"],
+    features: ["문구 1곳 또는 준비된 이미지 1장", "한 페이지 · 수정 1회", "작업 기간 1일", "적용 가능 여부·권한 사전 확인"],
     recommended: false,
   },
   {
@@ -70,6 +70,7 @@ const TIERS = [
 ];
 
 const FAQS = [
+  { q: "네이버 블로그·카페 디자인 수정도 가능한가요?", a: "블로그 타이틀·프로필·배너와 카페 대문·메뉴 이미지의 제작 및 교체를 상담합니다. 네이버에서 제공하는 설정 범위 안에서 진행합니다. 준비된 이미지 1장 교체는 5,000원 기본 범위이며 새 이미지 제작·여러 장 교체·전체 꾸미기는 별도 견적입니다." },
   {
     q: "다른 업체가 만든 홈페이지도 수정 가능한가요?",
     a: "가능한 경우가 많습니다. 다만 사이트 제작 방식과 접근 권한에 따라 달라질 수 있어 먼저 확인 후 안내드립니다.",
@@ -261,7 +262,7 @@ export default function Page() {
             <span className="text-accent">필요한 곳만 고쳐드립니다.</span>
           </h1>
           <p className="max-w-[600px] text-[17px] leading-relaxed text-muted md:text-xl">
-            텍스트 수정, 이미지 교체, 버튼 링크 변경, 모바일 깨짐까지 빠르게 정리해드립니다.
+            홈페이지 문구·이미지 수정, 네이버 블로그·카페 꾸미기, 모바일 오류를 상담합니다.
             <br className="hidden md:block" /> 화면 캡처 한 장이면 상담을 시작할 수 있습니다.
           </p>
           <div className="mt-1 flex flex-col gap-3.5 sm:flex-row">
@@ -697,6 +698,16 @@ export default function Page() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="naver" className="scroll-mt-24 border-t border-line bg-navy2 px-6 py-20 md:px-10">
+        <div className="mx-auto max-w-[980px]"><SectionLabel>블로그·카페도 함께</SectionLabel>
+          <h2 className="text-3xl font-extrabold md:text-4xl">네이버 블로그·카페,<br />바꾸고 싶은 곳부터 알려주세요.</h2>
+          <div className="my-8 grid gap-5 md:grid-cols-2">{[["블로그 디자인", "타이틀·배너·프로필 이미지 제작 및 교체, 스킨·메뉴 꾸미기 상담"],["카페 디자인", "대문·배너·메뉴 이미지 제작 및 교체, 전체 분위기 정리 상담"]].map(([t,d])=><article key={t} className="lux-card rounded-2xl p-6"><h3 className="text-xl font-bold text-cyan">{t}</h3><p className="mt-4 leading-7 text-muted">{d}</p></article>)}</div>
+          <p className="leading-7 text-muted">준비된 이미지 1장 교체 또는 수정 가능한 문구 1곳 변경은 5,000원 기본 범위입니다. 한 페이지·수정 1회·작업 기간 1일 기준이며, 네이버가 제공하는 설정 범위와 관리 권한을 먼저 확인합니다.</p>
+          <p className="mt-3 leading-7 text-muted">새 이미지 제작, 여러 이미지 교체, 전체 꾸미기는 별도 견적입니다. 주소와 바꿀 위치, 준비된 이미지와 원하는 분위기를 크몽으로 보내주세요.</p>
+          <a href={KMONG_URL} className="btn-primary mt-7 inline-block rounded-xl px-7 py-4 font-bold text-navy">블로그·카페 수정 문의하기 →</a>
         </div>
       </section>
 

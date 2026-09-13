@@ -146,7 +146,7 @@ const SERVICES = [
   { title: "학원·맞춤 관리 프로그램", desc: "학생·출결·성적 관리 경험을 바탕으로, 우리 업무에 맞는 관리 도구를 만듭니다.", href: "/programs", status: "맞춤 상담", live: true, icon: "/icons/automation.png" },
   {
     title: "홈페이지 수정 클리닉",
-    desc: "문구·이미지·버튼·모바일 깨짐, 필요한 곳만 빠르게 고칩니다.",
+    desc: "홈페이지 문구·이미지 수정부터 네이버 블로그·카페 꾸미기까지 상담합니다.",
     href: "/clinic",
     status: "크몽 등록 상품",
     live: true,
@@ -309,10 +309,11 @@ export default function HubPage() {
                 <span className="text-ice">맞춤 프로그램까지.</span>
               </h1>
               <p className="max-w-[560px] text-[16px] leading-relaxed text-soft md:text-lg">
-                문구·이미지 교체, 화면 오류 해결부터 시작하세요.
+                홈페이지·네이버 블로그·카페의 작은 수정부터 시작하세요.
                 <br className="hidden md:block" />
                 <span className="text-muted">학원 관리와 한글 HWPX·업무 자동화로 반복하는 시간을 줄입니다.</span>
               </p>
+              <div className="flex flex-wrap justify-center gap-3 md:justify-start"><a href="https://kmong.com/gig/789321" className="btn-primary rounded-xl px-6 py-3 font-bold text-navy">5천원 작은 수정 보기 →</a><a href="#start" className="btn-ghost rounded-xl px-6 py-3 font-semibold">작업 범위 확인</a></div>
               <div className="dive-cue mt-2 flex flex-col items-center gap-2 text-cyan">
                 <span className="text-[11px] font-bold tracking-[0.24em]">SCROLL</span>
                 <span className="dive-cue-arrow" />
