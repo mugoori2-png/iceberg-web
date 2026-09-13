@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 // /automation 전용 메타데이터 — 페이지 컴포넌트가 "use client" 라 여기서 선언
 export const metadata: Metadata = {
-  title: "업무 자동화 프로그램 — 매일 하는 일을 클릭 한 번으로",
+  title: "한글 HWPX·업무 자동화 — 중요한 일에 시간을 쓰세요 | ICEBERG",
   description:
-    "엑셀 정리, 한글(HWP)·워드 문서 대량 생성, 반복 업무 자동화 프로그램을 만들어드립니다. 반나절 걸리던 일을 분 단위로 — 실무에서 직접 운영 중인 자동화 경험 그대로.",
+    "한글 HWPX 문서 생성, 엑셀·파일 정리, 반복 입력에 쓰는 시간을 줄이는 맞춤 자동화 프로그램. 실제 업무와 양식을 확인해 제작 범위를 안내합니다.",
 };
 
 export default function AutomationLayout({ children }: { children: React.ReactNode }) {

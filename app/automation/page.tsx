@@ -310,7 +310,7 @@ export default function Page() {
       {/* 3. 문제 공감 */}
       <section className="border-t border-line bg-navy2 px-6 py-24 md:px-10 md:py-28">
         <p className="mx-auto mb-16 max-w-[640px] text-center text-[17px] leading-[1.75] text-muted md:text-[19px]">
-          하루 30분짜리 반복 작업도 1년이면 120시간이 넘습니다.
+          하루 30분 · 월 20일 · 12개월이면 반복 업무에 쓰는 시간은 120시간입니다.
           <br />
           <strong className="font-bold text-ink">그 시간에 해야 할 더 중요한 일이 있으실 겁니다.</strong>
         </p>
@@ -592,7 +592,7 @@ export default function Page() {
           <h2 className="text-[34px] font-extrabold leading-tight tracking-tighter md:text-[50px]">
             오늘도 반복 작업으로 하루를 보냈다면,
             <br />
-            이번 주가 마지막이 되게 해드립니다
+            가장 번거로운 일 하나부터 바꿔보세요
           </h2>
           <p className="max-w-[560px] text-[16px] leading-[1.65] text-muted md:text-lg">
             지금 손으로 하고 계신 작업을 그대로 설명해주세요.
