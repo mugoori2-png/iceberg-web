@@ -1,6 +1,8 @@
 "use client";
 
 import TimeValue from "./components/TimeValue";
+import ProofSection from "./components/ProofSection";
+import StudentCardDemo from "./components/StudentCardDemo";
 import { QuickStart, AboutSection, ProcessSection } from "./components/BusinessSections";
 import { useEffect, useRef, useState } from "react";
 import { WORKS, WORK_CATEGORIES, type WorkCategory } from "./data/works";
@@ -313,7 +315,7 @@ export default function HubPage() {
                 <br className="hidden md:block" />
                 <span className="text-muted">학원 관리와 한글 HWPX·업무 자동화로 반복하는 시간을 줄입니다.</span>
               </p>
-              <div className="flex flex-wrap justify-center gap-3 md:justify-start"><a href="https://kmong.com/gig/789321" className="btn-primary rounded-xl px-6 py-3 font-bold text-navy">5천원 작은 수정 보기 →</a><a href="#start" className="btn-ghost rounded-xl px-6 py-3 font-semibold">작업 범위 확인</a></div>
+              <div className="flex flex-wrap justify-center gap-3 md:justify-start"><a href="https://kmong.com/gig/789321" className="btn-primary rounded-xl px-6 py-3 font-bold text-navy">5천원 작은 수정 보기 →</a><a href="#student-demo" className="btn-ghost rounded-xl px-6 py-3 font-semibold">직접 만든 기능 체험</a></div>
               <div className="dive-cue mt-2 flex flex-col items-center gap-2 text-cyan">
                 <span className="text-[11px] font-bold tracking-[0.24em]">SCROLL</span>
                 <span className="dive-cue-arrow" />
@@ -361,6 +363,8 @@ export default function HubPage() {
         </div>
       </section>
 
+      <StudentCardDemo />
+      <ProofSection />
       <QuickStart />
       <AboutSection />
       <TimeValue />
