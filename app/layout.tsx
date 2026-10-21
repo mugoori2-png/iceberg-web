@@ -3,13 +3,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cmong-lac.vercel.app"),
-  title: "ICEBERG — 홈페이지 제작·수정 · 업무 자동화 · AI 챗봇 구축",
+  title: "ICEBERG — 홈페이지 문구·이미지 작은 수정 5,000원부터",
   description:
-    "직접 만들어 운영하는 개발자가 필요한 것만 빠르게 만들어드립니다. 문제은행 12,000+, AI 튜터, 자동 채점, 출결 — 매일 실제로 돌아가는 시스템이 증거입니다.",
+    "문구 1곳 또는 준비된 이미지 1장 교체 5,000원. 홈페이지 주소와 바꿀 화면을 보내주세요. 작업 가능 여부와 비용부터 안내합니다.",
   openGraph: {
-    title: "ICEBERG — 홈페이지 제작·수정 · 업무 자동화 · AI 챗봇 구축",
+    title: "ICEBERG — 홈페이지 문구·이미지 작은 수정 5,000원부터",
     description:
-      "직접 만들어 운영하는 개발자가 필요한 것만 만들어드립니다. 홈페이지 수정 · 업무 자동화 · AI 챗봇 구축.",
+      "문구 한 줄, 사진 한 장부터. 작은 홈페이지 수정과 실제 개발 사례를 확인하고 크몽에서 문의하세요.",
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: {

@@ -9,8 +9,8 @@ export function QuickStart() {
       <div className="my-8 grid gap-4 sm:grid-cols-2">{[
         ["01", "문구·이미지 교체", "소개 문구, 연락처, 배너, 사진, 버튼 이름과 링크 수정"],
         ["02", "모바일 화면 수정", "휴대폰에서 잘리는 글자, 겹치는 버튼, 어긋난 여백과 배치"],
-        ["04", "네이버 블로그·카페", "블로그 타이틀·프로필, 카페 대문·배너 이미지 교체와 꾸미기 상담"],
-        ["03", "홈페이지 오류 점검", "작동하지 않는 버튼과 화면 오류를 확인하고 수정 범위 안내"],
+        ["03", "네이버 블로그·카페", "블로그 타이틀·프로필, 카페 대문·배너 이미지 교체와 꾸미기 상담"],
+        ["04", "홈페이지 오류 점검", "작동하지 않는 버튼과 화면 오류를 확인하고 수정 범위 안내"],
       ].map(([n,t,d]) => <article key={n} className="lux-card rounded-2xl p-6"><span className="font-mono text-cyan">{n}</span><h3 className="my-3 text-xl font-bold">{t}</h3><p className="text-sm leading-6 text-muted">{d}</p></article>)}</div>
       <div className="flex flex-wrap items-center gap-5"><a href={KMONG} className="btn-primary rounded-xl px-6 py-4 font-bold text-navy">크몽 수정 상품 보기 →</a><p className="text-sm text-muted">5,000원 · 문구 1곳 또는 준비된 이미지 1장 교체</p></div>
       <p className="mt-4 text-sm text-dim">한 페이지 · 수정 1회 · 작업 기간 1일 기준입니다. 적용 가능 여부와 수정 권한을 먼저 확인합니다. 새 이미지 제작·전체 꾸미기·오류 해결·레이아웃 변경은 별도 견적입니다.</p>

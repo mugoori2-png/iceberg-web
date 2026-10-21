@@ -256,116 +256,27 @@ export default function HubPage() {
         )}
       </header>
 
-      {/* Hero — 스크롤로 수면 아래 빙산으로 잠수하는 다이브 */}
-      <section ref={diveRef} className="dive relative">
-        <div className="dive-stage sticky top-0 flex h-screen items-center justify-center overflow-hidden text-center">
-          {/* 수면(위) → 심해(아래) 배경 */}
-          <div className="dive-water pointer-events-none absolute inset-0" />
-          {/* 빙산 씬(Higgsfield 생성) — 스크롤하면 씬이 위로 흘러 심해로 잠수 */}
-          <div className="dive-scene pointer-events-none">
-            <img src="/hero-berg.jpg" alt="" aria-hidden="true" />
+      <section className="relative overflow-hidden border-b border-line px-6 pb-16 pt-32 md:px-10 md:pb-24 md:pt-40">
+        <div className="mx-auto grid max-w-[1080px] gap-10 md:grid-cols-[1.3fr_1fr] md:items-center">
+          <div>
+            <p className="text-sm font-bold tracking-widest text-cyan">ICEBERG · 작은 수정도 맡겨주세요</p>
+            <h1 className="mt-5 text-4xl font-extrabold leading-tight md:text-6xl">문구 한 줄, 사진 한 장.<br/><span className="text-cyan">필요한 곳만 고칩니다.</span></h1>
+            <p className="mt-6 text-lg leading-8 text-soft">홈페이지에서 바꾸고 싶은 화면을 보내주세요.<br/>가능한 작업과 비용부터 안내합니다.</p>
+            <div className="mt-7 flex flex-wrap gap-3"><a href="https://kmong.com/gig/789321" className="btn-primary rounded-xl px-6 py-4 font-bold text-navy">크몽에서 작은 수정 문의 →</a><a href="#start" className="btn-ghost rounded-xl px-6 py-4 font-bold">5천원 작업 범위 보기</a></div>
+            <p className="mt-4 text-sm leading-6 text-muted">문구 1곳 또는 준비된 이미지 1장 교체 · 5,000원<br/>1페이지 · 수정 1회 · 작업 1일 / 결제 전 가능 여부 확인</p>
           </div>
-          <div className="bg-dots pointer-events-none absolute inset-0" />
-          {/* 수면에서 내리꽂히는 광선 */}
-          <div className="dive-rays pointer-events-none" />
-          {/* 내려갈수록 짙어지는 심해 */}
-          <div className="dive-abyss pointer-events-none absolute inset-0" />
-          {/* 잠수 깊이에 따라 씬 전체를 눌러주는 딤 */}
-          <div className="dive-dim pointer-events-none absolute inset-0" />
-          {/* 상단 글로우 */}
-          <div className="dive-glow pointer-events-none absolute left-1/2 top-[-12%] h-[520px] w-[860px]" />
-
-          {/* 헤드라인 가독 스크림 + 필름 그레인 */}
-          <div className="dive-scrim pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-          <div className="grain pointer-events-none absolute inset-0" />
-
-          {/* 상승 기포 */}
-          <div className="dive-bubbles pointer-events-none absolute inset-0">
-            {Array.from({ length: 16 }).map((_, i) => {
-              const size = 4 + (i % 4) * 3;
-              return (
-                <span
-                  key={i}
-                  style={{
-                    left: `${(i * 6.15 + 3) % 100}%`,
-                    width: size,
-                    height: size,
-                    animationDuration: `${7 + (i % 5) * 1.3}s`,
-                    animationDelay: `${-i * 0.8}s`,
-                  }}
-                />
-              );
-            })}
-          </div>
-
-          {/* 콘텐츠 — 진입 카피(위)와 수면 아래 카피(아래)가 스크롤로 교차 */}
-          <div className="relative z-10 mx-auto w-full max-w-[1140px] px-6 md:px-10">
-            {/* 진입 — 데스크톱: 왼쪽 정렬(빙산은 오른쪽), 모바일: 중앙 */}
-            <div className="dive-intro flex flex-col items-center gap-7 text-center md:max-w-[600px] md:items-start md:text-left">
-              <div className="rounded-full border border-[rgba(47,214,255,0.3)] bg-[rgba(8,18,38,0.65)] px-4 py-1.5 text-[13px] font-semibold text-cyan backdrop-blur-md md:text-sm">
-                ICEBERG · 직접 만들어 운영하는 개발자
-              </div>
-              <h1 className="text-[36px] font-extrabold leading-[1.18] tracking-tighter md:text-[56px] [text-shadow:0_2px_28px_rgba(3,8,20,0.65)]">
-                홈페이지 제작·수정부터
-                <br />
-                <span className="text-ice">맞춤 프로그램까지.</span>
-              </h1>
-              <p className="max-w-[560px] text-[16px] leading-relaxed text-soft md:text-lg">
-                홈페이지·네이버 블로그·카페의 작은 수정부터 시작하세요.
-                <br className="hidden md:block" />
-                <span className="text-muted">학원 관리와 한글 HWPX·업무 자동화로 반복하는 시간을 줄입니다.</span>
-              </p>
-              <div className="flex flex-wrap justify-center gap-3 md:justify-start"><a href="https://kmong.com/gig/789321" className="btn-primary rounded-xl px-6 py-3 font-bold text-navy">5천원 작은 수정 보기 →</a><a href="#student-demo" className="btn-ghost rounded-xl px-6 py-3 font-semibold">직접 만든 기능 체험</a></div>
-              <div className="dive-cue mt-2 flex flex-col items-center gap-2 text-cyan">
-                <span className="text-[11px] font-bold tracking-[0.24em]">SCROLL</span>
-                <span className="dive-cue-arrow" />
-              </div>
-            </div>
-
-            {/* 잠수 후 — 수면 아래 실제 시스템들 (인트로와 같은 왼쪽 라인) */}
-            <div className="dive-deep text-center md:text-left">
-              <p className="eyebrow mb-4 text-[12px] font-bold text-cyan md:justify-start">BELOW THE SURFACE</p>
-              <h2 className="mx-auto mb-4 max-w-[720px] text-[30px] font-extrabold leading-[1.16] tracking-tight md:mx-0 md:text-[52px] [text-shadow:0_2px_28px_rgba(3,8,20,0.65)]">
-                수면 아래엔, 매일 실제로
-                <br className="hidden sm:block" /> 돌아가는 <span className="text-ice">시스템들</span>이 있습니다.
-              </h2>
-              <p className="mx-auto mb-9 max-w-[560px] text-[15px] leading-relaxed text-muted md:mx-0 md:text-lg">
-                문제은행 12,000+ · AI 튜터 · 자동 채점 · 출결.
-                <br className="hidden md:block" />
-                전부 지금 실제 운영 중 — 아래 작업사례에서 직접 확인하실 수 있습니다.
-              </p>
-              <div className="dive-deep-body mx-auto grid max-w-[720px] grid-cols-2 gap-3 md:mx-0 md:grid-cols-4">
-                {STATS.map((s) => (
-                  <div key={s.label} className="lux-card rounded-2xl px-4 py-5">
-                    <p className="text-[24px] font-extrabold tracking-tight text-accent md:text-[28px]">
-                      <CountUp value={s.value} />
-                    </p>
-                    <p className="mt-1 text-[12px] font-semibold text-muted">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="dive-deep-body mt-8 flex flex-col justify-center gap-3.5 sm:flex-row md:justify-start">
-                <a
-                  href="#works"
-                  className="btn-primary rounded-xl px-8 py-4 text-[17px] font-extrabold text-navy"
-                >
-                  실제 작업사례 보기
-                </a>
-                <a
-                  href={KMONG_PROFILE_URL}
-                  className="btn-ghost rounded-xl px-8 py-4 text-[17px] font-semibold text-ink"
-                >
-                  크몽에서 문의하기
-                </a>
-              </div>
-            </div>
-          </div>
+          <aside className="rounded-3xl border border-line bg-navy2 p-7 md:p-9">
+            <p className="text-sm font-bold text-cyan">처음 문의할 때는 이것만</p>
+            <ol className="mt-6 space-y-5 text-lg"><li>① 수정할 홈페이지 주소</li><li>② 바꾸고 싶은 화면 캡처</li><li>③ 새 문구 또는 교체할 사진</li></ol>
+            <p className="mt-6 border-t border-line pt-5 text-sm leading-7 text-muted">“여기를 이렇게 바꾸고 싶어요”라고 알려주세요. 작업 범위와 비용을 확인한 뒤 진행합니다. 오류 수정·새 이미지 제작은 별도 견적입니다.</p>
+            <a href="#proof" className="mt-5 inline-block font-bold text-cyan">실제 화면 개선 전·후 보기 →</a>
+          </aside>
         </div>
       </section>
 
-      <StudentCardDemo />
-      <ProofSection />
       <QuickStart />
+      <ProofSection />
+      <StudentCardDemo />
       <AboutSection />
       <TimeValue />
       {/* 서비스 (전단지들) */}

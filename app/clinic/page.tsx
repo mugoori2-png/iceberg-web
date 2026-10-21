@@ -639,7 +639,7 @@ export default function Page() {
             ))}
           </div>
           <p className="mt-8 text-center text-[13px] text-dim">
-            실제 작업 후기는 크몽 서비스 오픈 후 순차적으로 업데이트됩니다.
+            실제 구매 후기는 크몽 상품 페이지에서 확인하실 수 있습니다.
           </p>
         </div>
       </section>
@@ -740,7 +740,7 @@ export default function Page() {
                 </div>
                 <p className="text-[32px] font-extrabold tracking-tight">
                   {t.price}
-                  <span className="text-[15px] font-semibold text-muted">부터</span>
+
                 </p>
                 <ul className="flex flex-1 flex-col gap-2 text-[14.5px] text-soft">
                   {t.features.map((f) => (
