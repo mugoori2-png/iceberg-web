@@ -1,0 +1,36 @@
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.frame{min-width:0;border:1px solid #ffffff18;border-radius:20px;overflow:hidden}
+.caption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:18px 20px;background:#101522;color:#9ca9bd;font-size:11px;font-weight:700;letter-spacing:.06em}
+.caption small{margin-left:8px;font-size:11px;font-weight:400;letter-spacing:0}
+.caption>span:last-child{font-size:10px}
+.afterFrame{border-color:#b1a2ff55;box-shadow:0 16px 65px #7161db18}
+.afterCaption{background:#211e35;color:#ded6ff}
+.before,.artboard{height:460px;position:relative;padding:30px}
+.before{background:#f3f2ed;color:#888d8e}
+.oldHeader{display:flex;justify-content:space-between;border-bottom:1px solid #d3d5d0;padding-bottom:22px;font-size:10px;letter-spacing:.12em;color:#596a6b}
+.oldContent{margin-top:100px;max-width:310px}
+.oldContent>span{font-size:10px}.oldContent p{font-size:22px;font-weight:600;line-height:1.6;margin:16px 0}
+.oldButton{display:inline-block;padding:8px 22px;border:1px solid #bfc5c1;border-radius:3px}
+.artboard{isolation:isolate;color:white;display:flex;flex-direction:column;overflow:hidden;background:#241b49}
+.theme0{background:radial-gradient(ellipse at 96% 95%,#f3b98d 0%,#a17cca 25%,transparent 61%),linear-gradient(135deg,#19162d 5%,#46376e 65%,#a77fc0)}
+.theme1{background:radial-gradient(ellipse at 95% 90%,#eadb9b 0%,#80ad8c 30%,transparent 64%),linear-gradient(140deg,#102d2d,#295d52 72%,#8ba777)}
+.theme2{background:radial-gradient(ellipse at 100% 100%,#bba7f8 0%,#5476c4 30%,transparent 65%),linear-gradient(135deg,#101e38,#293c68 65%,#6685c5)}
+.glow{position:absolute;inset:0;z-index:-1;opacity:.2;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,#ffffff15 4px);pointer-events:none}
+.artHeader{display:flex;justify-content:space-between;align-items:flex-start;font-size:9px;line-height:1.6;letter-spacing:.15em;color:#ffffffab}
+.artHeader b{font-size:16px;color:#fff;letter-spacing:.07em}.artHeader>span:last-child{text-align:right}
+.artCopy{position:relative;z-index:2;margin-top:54px}
+.eyebrow{font-size:8px;letter-spacing:.16em;color:#ffffffa8}
+.artCopy h3{margin:15px 0 18px;font-size:clamp(27px,3.1vw,39px);line-height:1.25;letter-spacing:-.06em;font-weight:800}
+.artCopy em{font-style:normal;color:#f3d5c2}.theme1 .artCopy em{color:#e3efb7}.theme2 .artCopy em{color:#b7d8ff}
+.artCopy p{font-size:11px;line-height:1.8;color:#ffffffba;max-width:290px}
+.sculpture{position:absolute;width:235px;height:235px;right:-48px;bottom:19px;z-index:1;transform:rotate(-24deg);pointer-events:none}
+.sculpture i{position:absolute;inset:0;border-radius:50%;border:25px solid #fff3;background:linear-gradient(135deg,#ffffff50,#ffffff02 60%);box-shadow:inset 8px 8px 18px #ffffff55,inset -14px -10px 22px #26164d66,10px 20px 30px #11072630}
+.sculpture i:nth-child(2){inset:34px;border-width:17px}.sculpture i:nth-child(3){inset:62px;border-width:9px}
+.sculpture>span{position:absolute;inset:0;display:grid;place-items:center;font-size:66px;font-weight:300;font-family:Georgia,serif;color:#fff9;transform:rotate(24deg)}
+.theme1 .sculpture{transform:rotate(-32deg);border-radius:50% 50% 12px 12px}.theme1 .sculpture i{border-radius:48% 48% 8px 8px}
+.theme2 .sculpture{transform:rotate(25deg)}.theme2 .sculpture i{border-radius:30%}
+.artFooter{position:relative;z-index:2;margin-top:auto;display:flex;justify-content:space-between;align-items:end;gap:10px}
+.demoCta{display:flex;align-items:center;gap:28px;background:#fff;color:#28233c;border:1px solid #fff9;border-radius:999px;padding:13px 19px;font-size:11px;font-weight:700;box-shadow:0 6px 22px #16102b20}
+.demoCta b{font-size:17px;line-height:1}.artFooter>span:last-child{font-size:8px;text-align:right;line-height:1.6;letter-spacing:.04em;color:#ffffffb8}
+@media(max-width:767px){.comparison{grid-template-columns:1fr;gap:18px}.before{height:230px;padding:25px}.oldContent{margin-top:35px}.oldContent p{font-size:19px}.artboard{height:440px;padding:26px}.artCopy h3{font-size:34px}.caption{padding:15px 20px}.sculpture{width:210px;height:210px;right:-50px;bottom:20px}}
+@media(max-width:360px){.artboard{padding:20px}.artCopy h3{font-size:29px}.artCopy p{font-size:10px}.demoCta{gap:15px;padding:12px 15px}}
