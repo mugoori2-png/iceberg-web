@@ -144,31 +144,12 @@ const KMONG_PROFILE_URL = "https://kmong.com/@김주루";
 
 /** 판매 중/준비 중 서비스(전단지) 목록 — 크몽 상품이 늘면 여기에 추가 */
 const SERVICES = [
-  { title: "학원·맞춤 관리 프로그램", desc: "학생·출결·성적 관리 경험을 바탕으로, 우리 업무에 맞는 관리 도구를 만듭니다.", href: "/programs", status: "맞춤 상담", live: true, icon: "/icons/automation.png" },
-  {
-    title: "홈페이지 수정 클리닉",
-    desc: "홈페이지 문구·이미지 수정부터 네이버 블로그·카페 꾸미기까지 상담합니다.",
-    href: "/clinic",
-    status: "크몽 등록 상품",
-    live: true,
-    icon: "/icons/clinic.png",
-  },
-  {
-    title: "맞춤형 AI 챗봇 구축",
-    desc: "회사 자료로 답하는 AI 챗봇 — 출처 인용, 모르면 답하지 않는 안전장치까지.",
-    href: "/chatbot",
-    status: "맞춤 상담",
-    live: true,
-    icon: "/icons/chatbot.png",
-  },
-  {
-    title: "한글 HWPX·업무 자동화",
-    desc: "한글 문서 생성, 엑셀·파일 정리. 반복 업무에 쓰는 시간을 줄여드립니다.",
-    href: "/automation",
-    status: "맞춤 상담",
-    live: true,
-    icon: "/icons/automation.png",
-  },
+  {title:"홈페이지 제작·리모델링",desc:"오래된 화면을 새롭게. 회사·가게 소개부터 모바일 개선, 문의 화면과 기능 추가까지.",href:"/web",status:"맞춤 제작",live:true,icon:"/icons/clinic.png"},
+  {title:"맞춤 프로그램·SaaS",desc:"성적·상담·예약·고객 관리. 우리 업무에 필요한 화면과 기능부터 만듭니다.",href:"/programs",status:"개발 사례·시연",live:true,icon:"/icons/automation.png"},
+  {title:"한글 HWPX·업무 자동화",desc:"반복 입력, 문서 생성, 엑셀 집계. 매번 손으로 하던 일을 줄입니다.",href:"/automation",status:"맞춤 제작",live:true,icon:"/icons/automation.png"},
+  {title:"AI 광고 영상·홍보 콘텐츠",desc:"제품·서비스 소개 영상, 세로형 숏폼, 배너. 전달할 메시지와 분위기부터 정리합니다.",href:"/creative",status:"제작 상담",live:true,icon:"/icons/chatbot.png"},
+  {title:"홈페이지 작은 수정",desc:"문구 한 곳, 준비된 사진 한 장부터. 작은 요청도 범위를 확인하고 진행합니다.",href:"/clinic",status:"5,000원부터",live:true,icon:"/icons/clinic.png"},
+  {title:"AI 웹앱 오류 수정·배포",desc:"AI로 만들다 막힌 웹앱. 실행 오류와 배포 문제를 확인하고 수정 범위를 안내합니다.",href:"https://kmong.com/gig/836175",status:"크몽 상담",live:true,icon:"/icons/chatbot.png"},
 ];
 
 const STATS = [
@@ -255,28 +236,23 @@ export default function HubPage() {
         )}
       </header>
 
-      <section className="relative overflow-hidden border-b border-line px-6 pb-16 pt-32 md:px-10 md:pb-24 md:pt-40">
-        <div className="mx-auto grid max-w-[1080px] gap-10 md:grid-cols-[1.3fr_1fr] md:items-center">
+      <section className="relative overflow-hidden border-b border-line px-6 py-20 md:px-10 md:py-28" style={{background:"radial-gradient(ellipse at 90% 20%, #40307465, transparent 55%), linear-gradient(145deg,#0c1424,#111b31 60%,#173744)"}}>
+        <div className="mx-auto grid max-w-[1080px] gap-12 md:grid-cols-[1.2fr_1fr] md:items-center">
           <div>
-            <p className="text-sm font-bold tracking-widest text-cyan">ICEBERG · 작은 수정도 맡겨주세요</p>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight md:text-6xl">문구 한 줄, 사진 한 장.<br/><span className="text-cyan">필요한 곳만 고칩니다.</span></h1>
-            <p className="mt-6 text-lg leading-8 text-soft">홈페이지에서 바꾸고 싶은 화면을 보내주세요.<br/>가능한 작업과 비용부터 안내합니다.</p>
-            <div className="mt-7 flex flex-wrap gap-3"><a href="https://kmong.com/gig/789321" className="btn-primary rounded-xl px-6 py-4 font-bold text-navy">크몽에서 작은 수정 문의 →</a><a href="#start" className="btn-ghost rounded-xl px-6 py-4 font-bold">5천원 작업 범위 보기</a></div>
-            <p className="mt-4 text-sm leading-6 text-muted">문구 1곳 또는 준비된 이미지 1장 교체 · 5,000원<br/>1페이지 · 수정 1회 · 작업 1일 / 결제 전 가능 여부 확인</p>
+            <p className="text-xs font-bold tracking-[.2em] text-cyan">ICEBERG · WEB / SOFTWARE / CONTENT</p>
+            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">홈페이지를 바꾸고,<br/><span className="text-cyan">일하는 방식을<br className="hidden md:block"/> 만듭니다.</span></h1>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-soft">홈페이지 제작·리모델링부터 맞춤 프로그램·SaaS,<br className="hidden lg:block"/> 업무 자동화와 AI 광고 영상까지.</p>
+            <div className="mt-8 flex flex-wrap gap-3"><a href={KMONG_PROFILE_URL} className="btn-primary rounded-xl px-6 py-4 font-bold text-navy">크몽에서 작업 상담 →</a><a href="#works" className="btn-ghost rounded-xl px-6 py-4 font-bold">직접 만든 작업 보기</a></div>
+            <a href="#start" className="mt-6 inline-block text-sm text-muted underline underline-offset-4">문구·이미지 작은 수정은 5,000원부터 →</a>
           </div>
-          <aside className="rounded-3xl border border-line bg-navy2 p-7 md:p-9">
-            <p className="text-sm font-bold text-cyan">처음 문의할 때는 이것만</p>
-            <ol className="mt-6 space-y-5 text-lg"><li>① 수정할 홈페이지 주소</li><li>② 바꾸고 싶은 화면 캡처</li><li>③ 새 문구 또는 교체할 사진</li></ol>
-            <p className="mt-6 border-t border-line pt-5 text-sm leading-7 text-muted">“여기를 이렇게 바꾸고 싶어요”라고 알려주세요. 작업 범위와 비용을 확인한 뒤 진행합니다. 오류 수정·새 이미지 제작은 별도 견적입니다.</p>
-            <a href="#proof" className="mt-5 inline-block font-bold text-cyan">작은 수정 전·후 예시 보기 →</a>
-          </aside>
+          <div className="grid gap-3">{[
+            ["01", "WEB", "새로 만들거나, 새롭게 바꾸거나", "홈페이지 제작 · 리모델링", "/web"],
+            ["02", "SOFTWARE", "우리 업무에 꼭 맞는 프로그램", "맞춤 프로그램 · SaaS · 자동화", "/programs"],
+            ["03", "CONTENT", "우리 서비스를 보여주는 콘텐츠", "AI 광고 영상 · 숏폼 · 배너", "/creative"],
+          ].map(([n,en,t,d,url])=><a key={n} href={url} className="group rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:bg-white/10"><div className="flex justify-between text-xs tracking-widest text-cyan"><span>{en}</span><span>{n} ↗</span></div><h2 className="mt-4 text-xl font-bold">{t}</h2><p className="mt-2 text-sm text-muted">{d}</p></a>)}</div>
         </div>
       </section>
 
-      <QuickStart />
-      <SmallWorkDemo />
-      <AboutSection />
-      <TimeValue />
       {/* 서비스 (전단지들) */}
       <section
         id="services"
@@ -289,7 +265,7 @@ export default function HubPage() {
             이런 일을 맡기실 수 있습니다
           </h2>
           <p className="mx-auto mb-14 max-w-[560px] text-center text-[16px] leading-[1.7] text-muted">
-            작은 수정부터 시작해서, 자동화·AI까지 필요한 만큼만.
+            필요한 작업을 골라보세요. 범위와 일정에 맞춰 상담합니다.
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {SERVICES.map((s, i) => (
@@ -327,6 +303,11 @@ export default function HubPage() {
           </div>
         </div>
       </section>
+
+      <SmallWorkDemo />
+      <AboutSection />
+      <QuickStart />
+      <TimeValue />
 
       {/* 작업사례 갤러리 */}
       <section id="works" className="scroll-mt-20 border-t border-line px-6 py-24 md:px-10 md:py-28">
@@ -421,7 +402,7 @@ export default function HubPage() {
             지금 상황부터 이야기해주세요.
           </h2>
           <p className="max-w-[560px] text-[16px] leading-[1.65] text-muted md:text-lg">
-            수정 한 건이든, 자동화든, 챗봇이든 — 필요한 범위부터 현실적으로 제안드립니다.
+            홈페이지·프로그램·자동화·광고 영상. 필요한 결과와 희망 일정을 알려주세요.
           </p>
           <a
             href={KMONG_PROFILE_URL}

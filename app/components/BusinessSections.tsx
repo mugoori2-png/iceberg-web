@@ -20,14 +20,14 @@ export function QuickStart() {
 
 export function AboutSection() {
   return <section id="about" className="scroll-mt-24 px-6 py-24 md:px-10"><div className="mx-auto grid max-w-[980px] gap-10 md:grid-cols-2">
-    <div><p className="text-sm font-bold tracking-widest text-cyan">ABOUT ICEBERG</p><h2 className="mt-4 text-3xl font-extrabold leading-tight md:text-4xl">직접 만들고 운영하며<br />쌓아온 경험을 담았습니다.</h2><p className="mt-6 leading-8 text-muted">ICEBERG는 크몽 전문가 김주루의 개발 브랜드입니다. React·Supabase 기반 학원 관리 시스템을 직접 개발하고 운영한 경험을 바탕으로 홈페이지 수정부터 맞춤 프로그램까지 필요한 기능을 함께 정리합니다.</p><a href="https://kmong.com/@김주루" className="mt-6 inline-block font-bold text-cyan">크몽 전문가 프로필 확인 →</a></div>
+    <div><p className="text-sm font-bold tracking-widest text-cyan">ABOUT ICEBERG</p><h2 className="mt-4 text-3xl font-extrabold leading-tight md:text-4xl">직접 만들고 운영하며<br />쌓아온 경험을 담았습니다.</h2><p className="mt-6 leading-8 text-muted">ICEBERG는 크몽 전문가 김주루의 개발 브랜드입니다. React·Supabase 기반 학원 관리 시스템을 직접 개발하고 운영한 경험을 바탕으로 홈페이지 제작·리모델링과 맞춤 프로그램·자동화를 진행합니다. AI 광고 영상과 홍보 콘텐츠 제작도 별도로 상담합니다.</p><a href="https://kmong.com/@김주루" className="mt-6 inline-block font-bold text-cyan">크몽 전문가 프로필 확인 →</a></div>
     <div className="lux-card rounded-2xl p-7"><h3 className="text-lg font-bold">직접 진행한 개발 분야</h3><ul className="mt-5 space-y-4 text-sm leading-6 text-soft"><li>웹 개발 — React, JavaScript, HTML/CSS, Supabase</li><li>학원 운영 — 학생·출결·성적 관리, 관리자 대시보드</li><li>학습 도구 — 문제은행, 모의고사, 교재 기반 AI 튜터</li><li>업무 자동화 — OMR 채점, 한글 시험지·정답지·해설지 생성</li></ul><p className="mt-6 border-t border-line pt-5 text-sm leading-6 text-muted">아래는 자체 개발·운영 경험을 정리한 포트폴리오입니다. 크몽 고객의 구매 후기는 크몽 프로필에서 확인하실 수 있습니다.</p></div>
   </div></section>;
 }
 
 export function ProcessSection() {
   return <section id="guide" className="px-6 py-24 md:px-10"><div className="mx-auto max-w-[980px]"><p className="text-sm font-bold tracking-widest text-cyan">HOW WE WORK</p><h2 className="mt-4 text-3xl font-extrabold">처음 맡기는 작업도, 순서대로.</h2><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[
-    ["요청 확인", "홈페이지 주소와 수정 화면, 원하는 결과를 크몽으로 보내주세요."],
+    ["요청 확인", "원하는 결과, 참고 화면이나 영상, 희망 일정을 크몽으로 보내주세요."],
     ["범위·견적 안내", "가능 여부, 포함 기능, 비용과 일정을 먼저 정리합니다."],
     ["작업·결과 확인", "합의한 범위대로 작업하고 변경 내용을 함께 확인합니다."],
     ["전달·사용 안내", "결과물과 필요한 사용 방법을 전달합니다. 추가 작업은 별도로 협의합니다."],

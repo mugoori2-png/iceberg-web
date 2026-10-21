@@ -3,13 +3,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cmong-lac.vercel.app"),
-  title: "ICEBERG — 홈페이지 문구·이미지 작은 수정 5,000원부터",
+  title: "ICEBERG — 홈페이지 리모델링·맞춤 프로그램·AI 광고 영상",
   description:
-    "문구 1곳 또는 준비된 이미지 1장 교체 5,000원. 홈페이지 주소와 바꿀 화면을 보내주세요. 작업 가능 여부와 비용부터 안내합니다.",
+    "홈페이지 제작·리모델링, 맞춤 프로그램과 SaaS, 한글·엑셀 업무 자동화, AI 광고 영상 제작을 상담합니다. 실제 개발 사례와 시연을 확인하세요.",
   openGraph: {
-    title: "ICEBERG — 홈페이지 문구·이미지 작은 수정 5,000원부터",
+    title: "ICEBERG — 홈페이지 리모델링·맞춤 프로그램·AI 광고 영상",
     description:
-      "문구 한 줄, 사진 한 장부터. 작은 홈페이지 수정과 실제 개발 사례를 확인하고 크몽에서 문의하세요.",
+      "홈페이지부터 프로그램, 자동화와 홍보 콘텐츠까지. 필요한 작업을 확인하고 크몽에서 상담하세요.",
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: {
