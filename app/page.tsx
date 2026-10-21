@@ -1,8 +1,7 @@
 "use client";
 
 import TimeValue from "./components/TimeValue";
-import ProofSection from "./components/ProofSection";
-import StudentCardDemo from "./components/StudentCardDemo";
+import SmallWorkDemo from "./components/SmallWorkDemo";
 import { QuickStart, AboutSection, ProcessSection } from "./components/BusinessSections";
 import { useEffect, useRef, useState } from "react";
 import { WORKS, WORK_CATEGORIES, type WorkCategory } from "./data/works";
@@ -269,14 +268,13 @@ export default function HubPage() {
             <p className="text-sm font-bold text-cyan">처음 문의할 때는 이것만</p>
             <ol className="mt-6 space-y-5 text-lg"><li>① 수정할 홈페이지 주소</li><li>② 바꾸고 싶은 화면 캡처</li><li>③ 새 문구 또는 교체할 사진</li></ol>
             <p className="mt-6 border-t border-line pt-5 text-sm leading-7 text-muted">“여기를 이렇게 바꾸고 싶어요”라고 알려주세요. 작업 범위와 비용을 확인한 뒤 진행합니다. 오류 수정·새 이미지 제작은 별도 견적입니다.</p>
-            <a href="#proof" className="mt-5 inline-block font-bold text-cyan">실제 화면 개선 전·후 보기 →</a>
+            <a href="#proof" className="mt-5 inline-block font-bold text-cyan">작은 수정 전·후 예시 보기 →</a>
           </aside>
         </div>
       </section>
 
       <QuickStart />
-      <ProofSection />
-      <StudentCardDemo />
+      <SmallWorkDemo />
       <AboutSection />
       <TimeValue />
       {/* 서비스 (전단지들) */}
